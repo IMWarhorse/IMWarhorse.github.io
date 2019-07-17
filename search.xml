@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F07%2F16%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[JavaWeb04-请求转发、重定向]]></title>
     <url>%2F2019%2F01%2F15%2FJavaWeb04-%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
     <content type="text"><![CDATA[请求乱码问题解决 使用String进行重新编码 1String name = new String(req.getParameter(“name”).toBytes(“iso8859-1”),”utf-8”); 使用公共配置 Get请求方式：第一步：在service()方法中使用req.setCharacterEncoding(“utf-8”);第二步：在tomcat服务器目录下的conf文件夹下找到server.xml文件，打开进行如下配置： 1&lt;Connector port=”8080” protocol=”HTTP/1.1” connectorTimeout=”20000” redirectPort=”8443” useBodyEncodingForURI=”true”/&gt; Post请求方式：在service()方法中使用request.setCharacterEncoding(“utf-8”); Servlet流程总结未加粗文本为不可见的，由Servlet容器或浏览器完成。加粗文本为开发人员控制的，开发时需要关注的内容，Servlet的使用流程。 浏览器发起请求到服务器（请求）服务器接收浏览器的请求进行解析，创建request对象存储请求数据服务器调用对应的Servlet进行请求处理，并将request对象作为实参传递给Servlet的方法Servlet的方法执行进行请求处理 设置请求编码格式 设置响应编码格式 获取请求信息 处理请求信息 创建业务层对象 处理 调用业务层对象方法 响应处理结果 数据流程流程浏览器—-&gt;服务器—-&gt;数据库浏览器&lt;—-服务器&lt;—-数据库 请求转发]]></content>
