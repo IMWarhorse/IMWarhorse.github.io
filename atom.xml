@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://imwarhorse.github.io/"/>
-  <updated>2019-07-17T09:15:16.136Z</updated>
+  <updated>2019-07-16T11:36:34.755Z</updated>
   <id>https://imwarhorse.github.io/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>中文测试文章</title>
-    <link href="https://imwarhorse.github.io/2019/07/17/%E4%B8%AD%E6%96%87%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
-    <id>https://imwarhorse.github.io/2019/07/17/中文测试文章/</id>
-    <published>2019-07-17T09:12:53.000Z</published>
-    <updated>2019-07-17T09:15:16.136Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>内容</p><hr><h2 id="标题-1"><a href="#标题-1" class="headerlink" title="标题"></a>标题</h2><p>内容</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;标题&quot;&gt;&lt;a href=&quot;#标题&quot; class=&quot;headerlink&quot; title=&quot;标题&quot;&gt;&lt;/a&gt;标题&lt;/h2&gt;&lt;p&gt;内容&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;标题-1&quot;&gt;&lt;a href=&quot;#标题-1&quot; class=&quot;headerlink&quot; title=&quot;标题
-      
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -57,6 +34,159 @@
     
     </summary>
     
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb04-请求转发、重定向</title>
+    <link href="https://imwarhorse.github.io/2019/01/15/JavaWeb04-%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91/"/>
+    <id>https://imwarhorse.github.io/2019/01/15/JavaWeb04-请求转发、重定向/</id>
+    <published>2019-01-15T06:03:59.000Z</published>
+    <updated>2019-07-17T13:50:46.243Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="请求乱码问题解决"><a href="#请求乱码问题解决" class="headerlink" title="请求乱码问题解决"></a>请求乱码问题解决</h2><ol><li><p>使用String进行重新编码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String name = <span class="keyword">new</span> String(req.getParameter(“name”).toBytes(“iso8859-<span class="number">1</span>”),”utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure></li><li><p>使用公共配置</p></li></ol><ul><li><p>Get请求方式：<br>第一步：在service()方法中使用req.setCharacterEncoding(“utf-8”);<br>第二步：在tomcat服务器目录下的conf文件夹下找到server.xml文件，打开进行如下配置：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">”8080”</span> <span class="attr">protocol</span>=<span class="string">”HTTP/1.1”</span> <span class="attr">connectorTimeout</span>=<span class="string">”20000”</span> <span class="attr">redirectPort</span>=<span class="string">”8443”</span> <span class="attr">useBodyEncodingForURI</span>=<span class="string">”true”/</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>Post请求方式：<br>在service()方法中使用request.setCharacterEncoding(“utf-8”);</p></li></ul><h2 id="Servlet流程总结"><a href="#Servlet流程总结" class="headerlink" title="Servlet流程总结"></a>Servlet流程总结</h2><p>未加粗文本为不可见的，由Servlet容器或浏览器完成。<br>加粗文本为开发人员控制的，开发时需要关注的内容，Servlet的使用流程。</p><hr><p>浏览器发起请求到服务器（请求）<br>服务器接收浏览器的请求进行解析，创建request对象存储请求数据<br>服务器调用对应的Servlet进行请求处理，并将request对象作为实参传递给Servlet的方法<br><strong>Servlet的方法执行进行请求处理</strong><br>    <strong>设置请求编码格式</strong><br>    <strong>设置响应编码格式</strong><br>    <strong>获取请求信息</strong><br>    <strong>处理请求信息</strong><br>        <strong>创建业务层对象</strong><br>        <strong>处理</strong><br>        <strong>调用业务层对象方法</strong><br>    <strong>响应处理结果</strong></p><hr><h3 id="数据流程流程"><a href="#数据流程流程" class="headerlink" title="数据流程流程"></a>数据流程流程</h3><p>浏览器—-&gt;服务器—-&gt;数据库<br>浏览器&lt;—-服务器&lt;—-数据库</p><h2 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;请求乱码问题解决&quot;&gt;&lt;a href=&quot;#请求乱码问题解决&quot; class=&quot;headerlink&quot; title=&quot;请求乱码问题解决&quot;&gt;&lt;/a&gt;请求乱码问题解决&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;使用String进行重新编码&lt;/p&gt;
+&lt;figure class=&quot;hig
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb03-Request对象和Response对象</title>
+    <link href="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request%E5%AF%B9%E8%B1%A1%E5%92%8CResponse%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/</id>
+    <published>2019-01-13T01:29:55.000Z</published>
+    <updated>2019-07-17T13:39:27.071Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h2><ol><li>从服务器启动后第一次调用到服务器关闭；</li><li>如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。<blockquote><p>从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。</p></blockquote></li></ol><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执行。</p><p>destroy()方法是在Servlet被销毁时执行，也就是服务器关闭时。</p><h2 id="service-方法、doGet-方法以及doPost-方法的使用和区别"><a href="#service-方法、doGet-方法以及doPost-方法的使用和区别" class="headerlink" title="service()方法、doGet()方法以及doPost()方法的使用和区别"></a>service()方法、doGet()方法以及doPost()方法的使用和区别</h2><ul><li>service()：不管是get方式还是post方式，如果Servlet类中有service()方法，则优先调用service()方法。但是，不推荐重写service()方法。</li><li>doGet()：在没有service()方法的情况下，如果请求方式是get，则调用该处理请求的方法。</li><li>doPost()：在没有service()方法的情况下，如果请求方式是post，则调用该处理请求的方法。</li></ul><h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>如果在重写的service()方法中调用了父类的service()方法（super.service(arg0, arg1)），则service方法处理完后，会再次根据请求方式响应doGet()或doPost()方法执行。所以，一般情况下，我们是不在重写的service()方法中调用父类的service()方法的，避免出现405错误。</p><h3 id="扩展：常见错误状态码"><a href="#扩展：常见错误状态码" class="headerlink" title="扩展：常见错误状态码"></a>扩展：常见错误状态码</h3><p>404错误：资源未找到。</p><ul><li>原因一：在请求地址中的Servlet别名书写错误。</li><li>原因二：虚拟项目名称拼写错误。</li></ul><p>500错误：内部服务器错误</p><ul><li>错误一：找不到web.xml中配置的url-pattern所映射的servlet类(配置错误，ClassNotFound)<ul><li>解决：在web.xml中校验servlet类的全限定路径是否拼写错误。</li></ul></li><li>错误二：因为处理请求的方法(service方法\doGet方法\doPost方法)中的代码执行错误导致。<ul><li>解决：根据错误提示对处理请求的方法体中的代码进行错误排查并更改。</li></ul></li></ul><p>405错误：请求方式不支持</p><p>原因：请求方式和servlet中的方法不匹配所导致。<br>解决：</p><ol><li>使用service()方法进行请求处理(不推荐)，并不在service()方法中直接使用父类的service()方法</li><li>重写doGet()和doPost()方法，并准确根据请求方式进行所重写方法的代码编写</li></ol><h2 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求到服务器，会遵循HTTP协议将请求数据发送到服务器。那么服务器收到的请求该怎么存储呢？不但要存，而且要保证完整性。</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>使用对象存储，服务器每接收一个请求，就创建一个对象专门存储此次请求数据。</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>Request对象。</p><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>服务器在接收到浏览器的请求后，会创建一个request对象，对象中存储了此次请求相关的请求数据。服务器在调用Servlet时将创建的request对象作为实参传递给Servlet的方法，比如：service()方法。</p><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>request对象中封存了当前请求的所有请求信息。</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>获取请求头数据：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取请求方式</span></span><br><span class="line">request.getMethod();</span><br><span class="line"><span class="comment">// 获取请求URL</span></span><br><span class="line">request.getRequestURL();</span><br><span class="line"><span class="comment">// 获取请求URI</span></span><br><span class="line">request.getRequestURI();</span><br><span class="line"><span class="comment">// 获取请求协议</span></span><br><span class="line">request.getScheme();</span><br></pre></td></tr></table></figure><p>获取请求行数据：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定的请求头信息</span></span><br><span class="line">request.getHeader(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回请求头的枚举集合</span></span><br><span class="line">request.getHeaderNames();</span><br></pre></td></tr></table></figure><p>获取用户数据：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定的用户数据</span></span><br><span class="line">request.getParameter(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回同键不同值的请求数据(多用于多选按钮)，返回的数组</span></span><br><span class="line">request.getParameterValues(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回所有用户请求数据的枚举集合</span></span><br><span class="line">request.getParameterNames();</span><br></pre></td></tr></table></figure><h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ol><li>如果要获取的请求数据不存在，不会报错，会返回null。</li><li>request对象由tomcat服务器创建，并作为实际参数传递给处理请求的servlet的处理请求的方法。</li></ol><h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>一个用来将数据响应到浏览器的对象。</p><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置响应头</span></span><br><span class="line">response.setHeader(String name,String value);<span class="comment">// 在响应头中添加信息，但是同键会覆盖。</span></span><br><span class="line">response.addHeader(String name,String value);<span class="comment">// 在响应头中添加响应信息，但是不会覆盖。</span></span><br><span class="line"><span class="comment">// 设置响应状态</span></span><br><span class="line">response.sendError(<span class="keyword">int</span> num, String msg);<span class="comment">// 自定义响应状态码</span></span><br><span class="line"><span class="comment">// 设置响应实体(核心)</span></span><br><span class="line">response.getWriter().write(String str);<span class="comment">// 响应具体的数据给浏览器</span></span><br><span class="line"><span class="comment">// 设置响应编码格式</span></span><br><span class="line">response.setContentType(“text/html;charset=utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure><h3 id="设置响应编码格式"><a href="#设置响应编码格式" class="headerlink" title="设置响应编码格式"></a>设置响应编码格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(“text/html;charset=utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>service()方法请求处理代码流程：</p><ul><li>设置响应编码格式</li><li>获取请求数据</li><li>处理请求数据</li><li>数据库操作（MVC思想）</li><li>响应处理结果</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Servlet的生命周期&quot;&gt;&lt;a href=&quot;#Servlet的生命周期&quot; class=&quot;headerlink&quot; title=&quot;Servlet的生命周期&quot;&gt;&lt;/a&gt;Servlet的生命周期&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;从服务器启动后第一次调用到服务器关闭；&lt;/li&gt;
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[经验分享]保证Cookie自动登录信息安全的方法</title>
+    <link href="https://imwarhorse.github.io/2019/01/12/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB-%E4%BF%9D%E8%AF%81Cookie%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>https://imwarhorse.github.io/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/</id>
+    <published>2019-01-12T04:44:18.000Z</published>
+    <updated>2019-07-17T13:28:52.542Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><blockquote><p>将用户的认证信息保存在一个Cookie中。</p></blockquote><ul><li>cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。</li><li>cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。</li></ul><h3 id="该设计的缺点"><a href="#该设计的缺点" class="headerlink" title="该设计的缺点"></a>该设计的缺点</h3><ol><li>即使数据库被盗了，盗用者还是无法登录到系统，因为组成cookie值的salt是保证在服务器站点配置文件中而非数据库中。</li><li>如果账号被盗了，用户修改密码，可以使盗用者的cookie值无效。</li><li>如果服务器端的数据库被盗了，通过修改salt值可以使所有用户的cookie值无效，迫使用户重新登录系统。</li><li>有效时间Expires可以设置为当前时间+过去时间（比如两天），这样可以保证每次登录的cookie值都不一样，防止盗用者窥探到自己的cookie值后作为后门，长期登录。</li></ol><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>每个用户登录之后生成一个随机的GUID，然后把GUID存在数据库里面（也可以考虑使用Redis，把用户信息和随机GUID以KEY-VALUE方式存储GUID-用户信息，存储时设置超时时间，比如20分钟，每次验证用户信息都自动延长20分钟。如果用户选择记住登录，则设置时间为30天）。安全要求高的话，每次重新登录（包括用户名密码和使用GUID）都重新生成GUID，旧的作废，这样在新的地方登录之后旧的记住登录就自动失效。安全要求低的话可以每次都返回相同的，直到用户修改密码之后让旧的GUID作废。用户Cookies里面没有直接和用户名、密码有关的内容，即使Cookies被盗了也无法修改密码，原用户发现账号异常之后只要修改密码就可以防止盗号了。</p><p>另：防止XSS攻击，可以将Http-Only设置为True。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;将用户的认证信息保存在一个Cookie中。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;cook
+      
+    
+    </summary>
+    
+      <category term="实战经验" scheme="https://imwarhorse.github.io/categories/%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+      <category term="经验" scheme="https://imwarhorse.github.io/tags/%E7%BB%8F%E9%AA%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb02-Servlet的url-pattern匹配规则</title>
+    <link href="https://imwarhorse.github.io/2019/01/11/JavaWeb02-Servlet%E7%9A%84url-pattern%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
+    <id>https://imwarhorse.github.io/2019/01/11/JavaWeb02-Servlet的url-pattern匹配规则/</id>
+    <published>2019-01-11T12:57:44.000Z</published>
+    <updated>2019-07-17T13:24:03.357Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="几种容易混淆的规则"><a href="#几种容易混淆的规则" class="headerlink" title="几种容易混淆的规则"></a>几种容易混淆的规则</h2><ol><li>servlet容器中的匹配规则既不是简单的通配，也不是正则表达式，而是特定的规则。所以不要用通配符或者正则表达式的匹配规则来看到servlet的url-pattern；</li><li>Servlet 2.5开始，一个servlet可以使用多个url-pattern规则，&lt;servlet-mapping&gt;标签表明了与该servlet响应的匹配规则，每个&lt;url-pattern&amp;gt代表一个匹配规则；</li><li>当servlet容器接收到浏览器发起的一个url请求后，容器会用url减去当前应用的上下文路径，以剩下的字符串作为servlet映射，假如url是<a href="http://localhost:8080/demo/index.html，其应用上下文是demo，容器http://localhost:8080/demo去掉，用剩下的/index部分拿来做servlet映射匹配；" target="_blank" rel="noopener">http://localhost:8080/demo/index.html，其应用上下文是demo，容器http://localhost:8080/demo去掉，用剩下的/index部分拿来做servlet映射匹配；</a></li><li>url-pattern映射匹配过程是有优先顺序的，而且，当有一个servlet匹配成功以后，就不会继续往后去匹配后面的servlet了。</li></ol><h2 id="一、四种匹配规则"><a href="#一、四种匹配规则" class="headerlink" title="一、四种匹配规则"></a>一、四种匹配规则</h2><h3 id="精准匹配"><a href="#精准匹配" class="headerlink" title="精准匹配"></a>精准匹配</h3><p>&lt;url-pattern&gt;中配置的项必须与url完全精准匹配。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/users.html<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/index.html<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/addUser.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure><p>当在浏览器中输入如下几种url时，都会被匹配到该servlet</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/demo/user/user.html</span><br><span class="line">http://localhost:8080/demo/index.html</span><br><span class="line">http://localhost:8080/demo/user/addUser.action</span><br></pre></td></tr></table></figure><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p><a href="http://localhost:8080/demo/user/addUser/" target="_blank" rel="noopener">http://localhost:8080/demo/user/addUser/</a> 是非法url，不会被当作<a href="http://localhost:8080/demo/user/addUser" target="_blank" rel="noopener">http://localhost:8080/demo/user/addUser</a> 识别</p><p>另外，上述url后面可以跟任意的查询条件，都会被匹配，如<a href="http://localhost:8080/demo/user/addUser?username=jerry&amp;age=18" target="_blank" rel="noopener">http://localhost:8080/demo/user/addUser?username=jerry&amp;age=18</a> 会被匹配到MyServlet。</p><h3 id="路径匹配"><a href="#路径匹配" class="headerlink" title="路径匹配"></a>路径匹配</h3><h4 id="以”-”字符开头，并以”-”结尾的字符串用于路径匹配"><a href="#以”-”字符开头，并以”-”结尾的字符串用于路径匹配" class="headerlink" title="以”/”字符开头，并以”/*”结尾的字符串用于路径匹配"></a>以”/”字符开头，并以”/*”结尾的字符串用于路径匹配</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure><p>路径以/user/开始，后面的路径可以任意。比如下面的url都会被匹配：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/demo/user/user.html</span><br><span class="line">http://localhost:8080/demo/user/addUser.action</span><br><span class="line">http://localhost:8080/demo/user/updateUser.action</span><br></pre></td></tr></table></figure><h3 id="扩展名匹配"><a href="#扩展名匹配" class="headerlink" title="扩展名匹配"></a>扩展名匹配</h3><p>以”*.”开头的字符串被用于扩展名匹配</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure><p>以上，则任何扩展名为jsp或action的url请求都会匹配，比如下面的url都会被匹配：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/demo/user/users.jsp</span><br><span class="line">http://localhost:8080/demo/toHome.action</span><br></pre></td></tr></table></figure><h3 id="缺省匹配"><a href="#缺省匹配" class="headerlink" title="缺省匹配"></a>缺省匹配</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="二、匹配顺序"><a href="#二、匹配顺序" class="headerlink" title="二、匹配顺序"></a>二、匹配顺序</h2><h3 id="精准匹配-1"><a href="#精准匹配-1" class="headerlink" title="精准匹配"></a>精准匹配</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">servlet-mapping1：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/users.html<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">servlet-mapping2：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br></pre></td></tr></table></figure><p>当一个请求<a href="http://localhost:8080/demo/user/users.hml" target="_blank" rel="noopener">http://localhost:8080/demo/user/users.hml</a> 来的时候，servlet-mapping1匹配到之后不再用servlet-mapping2匹配。</p><h3 id="路径匹配-1"><a href="#路径匹配-1" class="headerlink" title="路径匹配"></a>路径匹配</h3><p>先最长路径匹配，再最短路径匹配</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">servlet-mapping1：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">servlet-mapping2：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br></pre></td></tr></table></figure><p>当一个请求<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 来的时候，servlet-mapping1匹配到之后，不在用servlet-mapping2匹配。</p><h3 id="扩展匹配"><a href="#扩展匹配" class="headerlink" title="扩展匹配"></a>扩展匹配</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">servlet-mapping1：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">servlet-mapping2：</span><br><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br></pre></td></tr></table></figure><p>当一个请求<a href="http://localhost:8080/demo/user/addUser.action" target="_blank" rel="noopener">http://localhost:8080/demo/user/addUser.action</a> 来的时候，servlet-mapping1匹配到，不再用servlet-mapping2匹配。</p><h3 id="缺省匹配-1"><a href="#缺省匹配-1" class="headerlink" title="缺省匹配"></a>缺省匹配</h3><p>以上都找不到servlet，就用默认的servlet，配置为：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="三、需要注意的问题"><a href="#三、需要注意的问题" class="headerlink" title="三、需要注意的问题"></a>三、需要注意的问题</h2><h3 id="路径匹配和扩展名匹配无法同时设置"><a href="#路径匹配和扩展名匹配无法同时设置" class="headerlink" title="路径匹配和扩展名匹配无法同时设置"></a>路径匹配和扩展名匹配无法同时设置</h3><p>匹配方法只有三种，要么是路径匹配(以”/”字符开头，并以”*”结尾)，要么是扩展名匹配(以”*.”开头)，要么是精确匹配，三种匹配方法不能进行组合，不要想当然使用通配符或正则表达式规则。</p><p>如&lt;url-pattern&gt;/user/*.action&lt;/url-pattern&gt;是非法的</p><p>另外注意：&lt;url-pattern&gt;/aa/*/bb&lt;/url-pattern&gt;是精准匹配，合法，这里的*不是通配的含义</p><h3 id="“-”和”-”含义不相同"><a href="#“-”和”-”含义不相同" class="headerlink" title="“/”和”/*”含义不相同"></a>“/”和”/*”含义不相同</h3><ul><li>“/*”属于路径匹配，并且可以匹配所有request，由于路径匹配的优先级仅次于精准匹配，所以”/*”会覆盖所有的扩展名匹配，很多404错误均由此引起，所以这是一个特别恶劣的匹配模式，一般只用于filter的url-pattern</li><li>“/”是servlet中特殊的匹配模式，且该模式有且仅有一个实例，优先级最低，不会覆盖其他任何url-pattern，只是会替换servlet容器的内建default servlet，该模式同样会匹配所有request。</li><li>配置”/”后，一种可能的现象是MyServlet会拦截诸如<a href="http://localhost:8080/demo/user/addUser.action、http://localhost:8080/demo/user/updateUser" target="_blank" rel="noopener">http://localhost:8080/demo/user/addUser.action、http://localhost:8080/demo/user/updateUser</a> 的格式的请求，但是并不会拦截<a href="http://localhost:8080/demo/user/users.jsp、http://localhost:8080/demo/index.jsp" target="_blank" rel="noopener">http://localhost:8080/demo/user/users.jsp、http://localhost:8080/demo/index.jsp</a> ，这是因为servlet容器有内置的”*.jsp”匹配器，而扩展名匹配的优先级高于缺省匹配，所以才会有上述现象。</li></ul><p>Tomcat在%CATALINA_HOME%\conf\web.xml文件中配置了默认的servlet，配置代码如下</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.DefaultServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>jsp<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.jasper.servlet.JspServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>fork<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>xpoweredBy<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>3<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- The mappings for the JSP servlet --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>jsp<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jspx<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure><ul><li>参考文献：<a href="http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern" target="_blank" rel="noopener">http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern</a></li><li>“/”和”/*”均会拦截静态资源的加载，需要特别注意</li></ul><h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p><img src="https://i.loli.net/2019/07/17/5d2f20d9a2bb640579.png" alt="001.png"><br><img src="https://i.loli.net/2019/07/17/5d2f20d9c055f84935.png" alt="002.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;几种容易混淆的规则&quot;&gt;&lt;a href=&quot;#几种容易混淆的规则&quot; class=&quot;headerlink&quot; title=&quot;几种容易混淆的规则&quot;&gt;&lt;/a&gt;几种容易混淆的规则&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;servlet容器中的匹配规则既不是简单的通配，也不是正则表达式，而是特
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+      <category term="技巧" scheme="https://imwarhorse.github.io/tags/%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb01-Servlet入门</title>
+    <link href="https://imwarhorse.github.io/2019/01/11/JavaWeb01-Servlet%E5%85%A5%E9%97%A8/"/>
+    <id>https://imwarhorse.github.io/2019/01/11/JavaWeb01-Servlet入门/</id>
+    <published>2019-01-11T10:26:20.000Z</published>
+    <updated>2019-07-17T12:56:58.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Servlet概述和介绍"><a href="#Servlet概述和介绍" class="headerlink" title="Servlet概述和介绍"></a>Servlet概述和介绍</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>狭义的Servlet是指Java语言实现的一个接口。广义的Servlet是指任何实现了Servlet接口的类，一般情况下，人们将Servlet理解为后者。Servlet运行于支持Java的应用服务器中。从原理上讲，Servlet可以响应任何类似的请求，但绝大多数情况下Servlet只用来扩展基于HTTP协议的Web服务器。</p><blockquote><ol><li>只要是实现了Servlet接口的类都可以称之为Servlet。</li><li>Servlet类需要继承HttpServlet，HttpServlet类又继承了GenericServlet类，而GenericServlet类实现了Servlet接口。</li></ol></blockquote><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul><li>运行在支持Java的应用服务器上；</li><li>Servlet的实现遵循了服务器能识别的规则，也就是服务器会自动根据请求调用对应的Servlet；</li><li>进行请求处理；</li><li>简单方便，可移植性强。</li></ul><h2 id="Servlet的访问流程"><a href="#Servlet的访问流程" class="headerlink" title="Servlet的访问流程"></a>Servlet的访问流程</h2><h3 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">URL：http://localhost:8080/myservlet/my</span><br><span class="line">组成：服务器地址:端口号/虚拟项目名/servlet的别名</span><br><span class="line">注：</span><br><span class="line">    虚拟项目：webapps下的文件夹的名称</span><br><span class="line">    servlet的别名：在web.xml设置的servlet-name对应的servlet-mapping下的url-pattern</span><br></pre></td></tr></table></figure><p>浏览器发送请求到服务器，服务器根据请求URL地址中的URI信息，在Tomcat的webapps目录下找到对应的项目文件夹，然后在web.xml 中检索对应的servlet，找到后调用并执行Servlet。</p><blockquote><p>URI：虚拟项目名/servlet的别名。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Servlet概述和介绍&quot;&gt;&lt;a href=&quot;#Servlet概述和介绍&quot; class=&quot;headerlink&quot; title=&quot;Servlet概述和介绍&quot;&gt;&lt;/a&gt;Servlet概述和介绍&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
     
   </entry>
   

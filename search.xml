@@ -1,13 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[中文测试文章]]></title>
-    <url>%2F2019%2F07%2F17%2F%E4%B8%AD%E6%96%87%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0%2F</url>
-    <content type="text"><![CDATA[标题内容 标题内容]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F07%2F16%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb04-请求转发、重定向]]></title>
+    <url>%2F2019%2F01%2F15%2FJavaWeb04-%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
+    <content type="text"><![CDATA[请求乱码问题解决 使用String进行重新编码 1String name = new String(req.getParameter(“name”).toBytes(“iso8859-1”),”utf-8”); 使用公共配置 Get请求方式：第一步：在service()方法中使用req.setCharacterEncoding(“utf-8”);第二步：在tomcat服务器目录下的conf文件夹下找到server.xml文件，打开进行如下配置： 1&lt;Connector port=”8080” protocol=”HTTP/1.1” connectorTimeout=”20000” redirectPort=”8443” useBodyEncodingForURI=”true”/&gt; Post请求方式：在service()方法中使用request.setCharacterEncoding(“utf-8”); Servlet流程总结未加粗文本为不可见的，由Servlet容器或浏览器完成。加粗文本为开发人员控制的，开发时需要关注的内容，Servlet的使用流程。 浏览器发起请求到服务器（请求）服务器接收浏览器的请求进行解析，创建request对象存储请求数据服务器调用对应的Servlet进行请求处理，并将request对象作为实参传递给Servlet的方法Servlet的方法执行进行请求处理 设置请求编码格式 设置响应编码格式 获取请求信息 处理请求信息 创建业务层对象 处理 调用业务层对象方法 响应处理结果 数据流程流程浏览器—-&gt;服务器—-&gt;数据库浏览器&lt;—-服务器&lt;—-数据库 请求转发]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb03-Request对象和Response对象]]></title>
+    <url>%2F2019%2F01%2F13%2FJavaWeb03-Request%E5%AF%B9%E8%B1%A1%E5%92%8CResponse%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。 注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执行。 destroy()方法是在Servlet被销毁时执行，也就是服务器关闭时。 service()方法、doGet()方法以及doPost()方法的使用和区别 service()：不管是get方式还是post方式，如果Servlet类中有service()方法，则优先调用service()方法。但是，不推荐重写service()方法。 doGet()：在没有service()方法的情况下，如果请求方式是get，则调用该处理请求的方法。 doPost()：在没有service()方法的情况下，如果请求方式是post，则调用该处理请求的方法。 注意如果在重写的service()方法中调用了父类的service()方法（super.service(arg0, arg1)），则service方法处理完后，会再次根据请求方式响应doGet()或doPost()方法执行。所以，一般情况下，我们是不在重写的service()方法中调用父类的service()方法的，避免出现405错误。 扩展：常见错误状态码404错误：资源未找到。 原因一：在请求地址中的Servlet别名书写错误。 原因二：虚拟项目名称拼写错误。 500错误：内部服务器错误 错误一：找不到web.xml中配置的url-pattern所映射的servlet类(配置错误，ClassNotFound) 解决：在web.xml中校验servlet类的全限定路径是否拼写错误。 错误二：因为处理请求的方法(service方法\doGet方法\doPost方法)中的代码执行错误导致。 解决：根据错误提示对处理请求的方法体中的代码进行错误排查并更改。 405错误：请求方式不支持 原因：请求方式和servlet中的方法不匹配所导致。解决： 使用service()方法进行请求处理(不推荐)，并不在service()方法中直接使用父类的service()方法 重写doGet()和doPost()方法，并准确根据请求方式进行所重写方法的代码编写 Request对象问题浏览器发起请求到服务器，会遵循HTTP协议将请求数据发送到服务器。那么服务器收到的请求该怎么存储呢？不但要存，而且要保证完整性。 解决使用对象存储，服务器每接收一个请求，就创建一个对象专门存储此次请求数据。 实现Request对象。 解释服务器在接收到浏览器的请求后，会创建一个request对象，对象中存储了此次请求相关的请求数据。服务器在调用Servlet时将创建的request对象作为实参传递给Servlet的方法，比如：service()方法。 作用request对象中封存了当前请求的所有请求信息。 使用获取请求头数据： 12345678// 获取请求方式request.getMethod();// 获取请求URLrequest.getRequestURL();// 获取请求URIrequest.getRequestURI();// 获取请求协议request.getScheme(); 获取请求行数据： 1234// 返回指定的请求头信息request.getHeader("键名");// 返回请求头的枚举集合request.getHeaderNames(); 获取用户数据： 123456// 获取指定的用户数据request.getParameter("键名");// 返回同键不同值的请求数据(多用于多选按钮)，返回的数组request.getParameterValues("键名");// 返回所有用户请求数据的枚举集合request.getParameterNames(); 注意 如果要获取的请求数据不存在，不会报错，会返回null。 request对象由tomcat服务器创建，并作为实际参数传递给处理请求的servlet的处理请求的方法。 Response对象作用一个用来将数据响应到浏览器的对象。 使用123456789// 设置响应头response.setHeader(String name,String value);// 在响应头中添加信息，但是同键会覆盖。response.addHeader(String name,String value);// 在响应头中添加响应信息，但是不会覆盖。// 设置响应状态response.sendError(int num, String msg);// 自定义响应状态码// 设置响应实体(核心)response.getWriter().write(String str);// 响应具体的数据给浏览器// 设置响应编码格式response.setContentType(“text/html;charset=utf-8”); 设置响应编码格式1response.setContentType(“text/html;charset=utf-8”); 总结service()方法请求处理代码流程： 设置响应编码格式 获取请求数据 处理请求数据 数据库操作（MVC思想） 响应处理结果]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[经验分享]保证Cookie自动登录信息安全的方法]]></title>
+    <url>%2F2019%2F01%2F12%2F%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB-%E4%BF%9D%E8%AF%81Cookie%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[方法一 将用户的认证信息保存在一个Cookie中。 cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。 cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。 该设计的缺点 即使数据库被盗了，盗用者还是无法登录到系统，因为组成cookie值的salt是保证在服务器站点配置文件中而非数据库中。 如果账号被盗了，用户修改密码，可以使盗用者的cookie值无效。 如果服务器端的数据库被盗了，通过修改salt值可以使所有用户的cookie值无效，迫使用户重新登录系统。 有效时间Expires可以设置为当前时间+过去时间（比如两天），这样可以保证每次登录的cookie值都不一样，防止盗用者窥探到自己的cookie值后作为后门，长期登录。 方法二每个用户登录之后生成一个随机的GUID，然后把GUID存在数据库里面（也可以考虑使用Redis，把用户信息和随机GUID以KEY-VALUE方式存储GUID-用户信息，存储时设置超时时间，比如20分钟，每次验证用户信息都自动延长20分钟。如果用户选择记住登录，则设置时间为30天）。安全要求高的话，每次重新登录（包括用户名密码和使用GUID）都重新生成GUID，旧的作废，这样在新的地方登录之后旧的记住登录就自动失效。安全要求低的话可以每次都返回相同的，直到用户修改密码之后让旧的GUID作废。用户Cookies里面没有直接和用户名、密码有关的内容，即使Cookies被盗了也无法修改密码，原用户发现账号异常之后只要修改密码就可以防止盗号了。 另：防止XSS攻击，可以将Http-Only设置为True。]]></content>
+      <categories>
+        <category>实战经验</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>经验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb02-Servlet的url-pattern匹配规则]]></title>
+    <url>%2F2019%2F01%2F11%2FJavaWeb02-Servlet%E7%9A%84url-pattern%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%2F</url>
+    <content type="text"><![CDATA[几种容易混淆的规则 servlet容器中的匹配规则既不是简单的通配，也不是正则表达式，而是特定的规则。所以不要用通配符或者正则表达式的匹配规则来看到servlet的url-pattern； Servlet 2.5开始，一个servlet可以使用多个url-pattern规则，&lt;servlet-mapping&gt;标签表明了与该servlet响应的匹配规则，每个&lt;url-pattern&amp;gt代表一个匹配规则； 当servlet容器接收到浏览器发起的一个url请求后，容器会用url减去当前应用的上下文路径，以剩下的字符串作为servlet映射，假如url是http://localhost:8080/demo/index.html，其应用上下文是demo，容器http://localhost:8080/demo去掉，用剩下的/index部分拿来做servlet映射匹配； url-pattern映射匹配过程是有优先顺序的，而且，当有一个servlet匹配成功以后，就不会继续往后去匹配后面的servlet了。 一、四种匹配规则精准匹配&lt;url-pattern&gt;中配置的项必须与url完全精准匹配。 123456&lt;servlet-mapping&gt; &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/user/users.html&lt;/url-pattern&gt; &lt;url-pattern&gt;/index.html&lt;/url-pattern&gt; &lt;url-pattern&gt;/user/addUser.action&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 当在浏览器中输入如下几种url时，都会被匹配到该servlet 123http://localhost:8080/demo/user/user.htmlhttp://localhost:8080/demo/index.htmlhttp://localhost:8080/demo/user/addUser.action 注意：http://localhost:8080/demo/user/addUser/ 是非法url，不会被当作http://localhost:8080/demo/user/addUser 识别 另外，上述url后面可以跟任意的查询条件，都会被匹配，如http://localhost:8080/demo/user/addUser?username=jerry&amp;age=18 会被匹配到MyServlet。 路径匹配以”/”字符开头，并以”/*”结尾的字符串用于路径匹配1234&lt;servlet-mapping&gt; &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/user/*&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 路径以/user/开始，后面的路径可以任意。比如下面的url都会被匹配： 123http://localhost:8080/demo/user/user.htmlhttp://localhost:8080/demo/user/addUser.actionhttp://localhost:8080/demo/user/updateUser.action 扩展名匹配以”*.”开头的字符串被用于扩展名匹配 12345&lt;servlet-mapping&gt; &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt; &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 以上，则任何扩展名为jsp或action的url请求都会匹配，比如下面的url都会被匹配： 12http://localhost:8080/demo/user/users.jsphttp://localhost:8080/demo/toHome.action 缺省匹配1234&lt;servlet-mapping&gt; &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 二、匹配顺序精准匹配1234servlet-mapping1：&lt;url-pattern&gt;/user/users.html&lt;/url-pattern&gt;servlet-mapping2：&lt;url-pattern&gt;/*&lt;/url-pattern&gt; 当一个请求http://localhost:8080/demo/user/users.hml 来的时候，servlet-mapping1匹配到之后不再用servlet-mapping2匹配。 路径匹配先最长路径匹配，再最短路径匹配 1234servlet-mapping1：&lt;url-pattern&gt;/user/*&lt;/url-pattern&gt;servlet-mapping2：&lt;url-pattern&gt;/*&lt;/url-pattern&gt; 当一个请求http://localhost:8080 来的时候，servlet-mapping1匹配到之后，不在用servlet-mapping2匹配。 扩展匹配1234servlet-mapping1：&lt;url-pattern&gt;/user/*&lt;/url-pattern&gt;servlet-mapping2：&lt;url-pattern&gt;*.action&lt;/url-pattern&gt; 当一个请求http://localhost:8080/demo/user/addUser.action 来的时候，servlet-mapping1匹配到，不再用servlet-mapping2匹配。 缺省匹配以上都找不到servlet，就用默认的servlet，配置为： 1&lt;url-pattern&gt;/&lt;/url-pattern&gt; 三、需要注意的问题路径匹配和扩展名匹配无法同时设置匹配方法只有三种，要么是路径匹配(以”/”字符开头，并以”*”结尾)，要么是扩展名匹配(以”*.”开头)，要么是精确匹配，三种匹配方法不能进行组合，不要想当然使用通配符或正则表达式规则。 如&lt;url-pattern&gt;/user/*.action&lt;/url-pattern&gt;是非法的 另外注意：&lt;url-pattern&gt;/aa/*/bb&lt;/url-pattern&gt;是精准匹配，合法，这里的*不是通配的含义 “/”和”/*”含义不相同 “/*”属于路径匹配，并且可以匹配所有request，由于路径匹配的优先级仅次于精准匹配，所以”/*”会覆盖所有的扩展名匹配，很多404错误均由此引起，所以这是一个特别恶劣的匹配模式，一般只用于filter的url-pattern “/”是servlet中特殊的匹配模式，且该模式有且仅有一个实例，优先级最低，不会覆盖其他任何url-pattern，只是会替换servlet容器的内建default servlet，该模式同样会匹配所有request。 配置”/”后，一种可能的现象是MyServlet会拦截诸如http://localhost:8080/demo/user/addUser.action、http://localhost:8080/demo/user/updateUser 的格式的请求，但是并不会拦截http://localhost:8080/demo/user/users.jsp、http://localhost:8080/demo/index.jsp ，这是因为servlet容器有内置的”*.jsp”匹配器，而扩展名匹配的优先级高于缺省匹配，所以才会有上述现象。 Tomcat在%CATALINA_HOME%\conf\web.xml文件中配置了默认的servlet，配置代码如下 123456789101112131415161718192021222324252627282930313233343536&lt;servlet&gt; &lt;servlet-name&gt;default&lt;/servlet-name&gt; &lt;servlet-class&gt;org.apache.catalina.servlets.DefaultServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;debug&lt;/param-name&gt; &lt;param-value&gt;0&lt;/param-value&gt; &lt;/init-param&gt; &lt;init-param&gt; &lt;param-name&gt;listings&lt;/param-name&gt; &lt;param-value&gt;false&lt;/param-value&gt; &lt;/init-param&gt; &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;&lt;/servlet&gt;&lt;servlet&gt; &lt;servlet-name&gt;jsp&lt;/servlet-name&gt; &lt;servlet-class&gt;org.apache.jasper.servlet.JspServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;fork&lt;/param-name&gt; &lt;param-value&gt;false&lt;/param-value&gt; &lt;/init-param&gt; &lt;init-param&gt; &lt;param-name&gt;xpoweredBy&lt;/param-name&gt; &lt;param-value&gt;false&lt;/param-value&gt; &lt;/init-param&gt; &lt;load-on-startup&gt;3&lt;/load-on-startup&gt; &lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;default&lt;/servlet-name&gt; &lt;url-pattern&gt;/&lt;/url-pattern&gt;&lt;/servlet-mapping&gt;&lt;!-- The mappings for the JSP servlet --&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;jsp&lt;/servlet-name&gt; &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt; &lt;url-pattern&gt;*.jspx&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 参考文献：http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern “/”和”/*”均会拦截静态资源的加载，需要特别注意 举例]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+        <tag>技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb01-Servlet入门]]></title>
+    <url>%2F2019%2F01%2F11%2FJavaWeb01-Servlet%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[Servlet概述和介绍概念狭义的Servlet是指Java语言实现的一个接口。广义的Servlet是指任何实现了Servlet接口的类，一般情况下，人们将Servlet理解为后者。Servlet运行于支持Java的应用服务器中。从原理上讲，Servlet可以响应任何类似的请求，但绝大多数情况下Servlet只用来扩展基于HTTP协议的Web服务器。 只要是实现了Servlet接口的类都可以称之为Servlet。 Servlet类需要继承HttpServlet，HttpServlet类又继承了GenericServlet类，而GenericServlet类实现了Servlet接口。 特点： 运行在支持Java的应用服务器上； Servlet的实现遵循了服务器能识别的规则，也就是服务器会自动根据请求调用对应的Servlet； 进行请求处理； 简单方便，可移植性强。 Servlet的访问流程运行流程12345URL：http://localhost:8080/myservlet/my组成：服务器地址:端口号/虚拟项目名/servlet的别名注： 虚拟项目：webapps下的文件夹的名称 servlet的别名：在web.xml设置的servlet-name对应的servlet-mapping下的url-pattern 浏览器发送请求到服务器，服务器根据请求URL地址中的URI信息，在Tomcat的webapps目录下找到对应的项目文件夹，然后在web.xml 中检索对应的servlet，找到后调用并执行Servlet。 URI：虚拟项目名/servlet的别名。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
   </entry>
 </search>

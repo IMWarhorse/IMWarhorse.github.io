@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Web,经验,">
 
 
 
@@ -125,17 +125,18 @@
 
 
 
-<meta name="description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
-<meta name="keywords" content="Java,Framework,MySQL,Spring,Spring MVC,MyBatis">
-<meta property="og:type" content="website">
-<meta property="og:title" content="War horse&#39;s blog">
-<meta property="og:url" content="https://imwarhorse.github.io/archives/2019/index.html">
+<meta name="description" content="方法一 将用户的认证信息保存在一个Cookie中。   cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。 cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。  该设计的缺点 即使数据库被盗了，盗用者还是无法登录到系统，因">
+<meta name="keywords" content="Web,经验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[经验分享]保证Cookie自动登录信息安全的方法">
+<meta property="og:url" content="https://imwarhorse.github.io/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/index.html">
 <meta property="og:site_name" content="War horse&#39;s blog">
-<meta property="og:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta property="og:description" content="方法一 将用户的认证信息保存在一个Cookie中。   cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。 cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。  该设计的缺点 即使数据库被盗了，盗用者还是无法登录到系统，因">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-17T13:28:52.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="War horse&#39;s blog">
-<meta name="twitter:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta name="twitter:title" content="[经验分享]保证Cookie自动登录信息安全的方法">
+<meta name="twitter:description" content="方法一 将用户的认证信息保存在一个Cookie中。   cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。 cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。  该设计的缺点 即使数据库被盗了，盗用者还是无法登录到系统，因">
 
 
 
@@ -165,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://imwarhorse.github.io/archives/2019/">
+  <link rel="canonical" href="https://imwarhorse.github.io/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/">
 
 
 
 
 
-  <title>归档 | War horse's blog</title>
+  <title>[经验分享]保证Cookie自动登录信息安全的方法 | War horse's blog</title>
   
 
 
@@ -190,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -326,247 +327,189 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="War horse">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="War horse's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">[经验分享]保证Cookie自动登录信息安全的方法</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T12:44:18+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 6 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实战经验/" itemprop="url" rel="index">
+                    <span itemprop="name">实战经验</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/16/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-16T19:36:34+08:00" content="2019-07-16">
-          07-16
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/15/JavaWeb04-请求转发、重定向/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb04-请求转发、重定向</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-15T14:03:59+08:00" content="2019-01-15">
-          01-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/13/JavaWeb03-Request对象和Response对象/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb03-Request对象和Response对象</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-13T09:29:55+08:00" content="2019-01-13">
-          01-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><blockquote>
+<p>将用户的认证信息保存在一个Cookie中。</p>
+</blockquote>
+<ul>
+<li>cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。</li>
+<li>cookie值：登录名|有效时间|Expires|hash值。hash值可以由“登录名+有效时间Expires+用户密码(进行加密处理后的)的前几位+salt”，salt是保证在服务器端站点配置文件中的随机数。</li>
+</ul>
+<h3 id="该设计的缺点"><a href="#该设计的缺点" class="headerlink" title="该设计的缺点"></a>该设计的缺点</h3><ol>
+<li>即使数据库被盗了，盗用者还是无法登录到系统，因为组成cookie值的salt是保证在服务器站点配置文件中而非数据库中。</li>
+<li>如果账号被盗了，用户修改密码，可以使盗用者的cookie值无效。</li>
+<li>如果服务器端的数据库被盗了，通过修改salt值可以使所有用户的cookie值无效，迫使用户重新登录系统。</li>
+<li>有效时间Expires可以设置为当前时间+过去时间（比如两天），这样可以保证每次登录的cookie值都不一样，防止盗用者窥探到自己的cookie值后作为后门，长期登录。</li>
+</ol>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>每个用户登录之后生成一个随机的GUID，然后把GUID存在数据库里面（也可以考虑使用Redis，把用户信息和随机GUID以KEY-VALUE方式存储GUID-用户信息，存储时设置超时时间，比如20分钟，每次验证用户信息都自动延长20分钟。如果用户选择记住登录，则设置时间为30天）。安全要求高的话，每次重新登录（包括用户名密码和使用GUID）都重新生成GUID，旧的作废，这样在新的地方登录之后旧的记住登录就自动失效。安全要求低的话可以每次都返回相同的，直到用户修改密码之后让旧的GUID作废。用户Cookies里面没有直接和用户名、密码有关的内容，即使Cookies被盗了也无法修改密码，原用户发现账号异常之后只要修改密码就可以防止盗号了。</p>
+<p>另：防止XSS攻击，可以将Http-Only设置为True。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/" itemprop="url">
-              
-                <span itemprop="name">[经验分享]保证Cookie自动登录信息安全的方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-12T12:44:18+08:00" content="2019-01-12">
-          01-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/11/JavaWeb02-Servlet的url-pattern匹配规则/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb02-Servlet的url-pattern匹配规则</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-11T20:57:44+08:00" content="2019-01-11">
-          01-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/11/JavaWeb01-Servlet入门/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb01-Servlet入门</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-11T18:26:20+08:00" content="2019-01-11">
-          01-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web/" rel="tag"># Web</a>
+          
+            <a href="/tags/经验/" rel="tag"># 经验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/11/JavaWeb02-Servlet的url-pattern匹配规则/" rel="next" title="JavaWeb02-Servlet的url-pattern匹配规则">
+                <i class="fa fa-chevron-left"></i> JavaWeb02-Servlet的url-pattern匹配规则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/13/JavaWeb03-Request对象和Response对象/" rel="prev" title="JavaWeb03-Request对象和Response对象">
+                JavaWeb03-Request对象和Response对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -574,6 +517,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -594,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -694,6 +650,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#该设计的缺点"><span class="nav-number">1.1.</span> <span class="nav-text">该设计的缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">2.</span> <span class="nav-text">方法二</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -834,6 +806,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
