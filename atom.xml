@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://imwarhorse.github.io/"/>
-  <updated>2019-07-19T11:23:34.268Z</updated>
+  <updated>2019-07-19T13:16:54.259Z</updated>
   <id>https://imwarhorse.github.io/</id>
   
   <author>
@@ -15,35 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>JavaWeb08-web.xml与server.xml</title>
-    <link href="https://imwarhorse.github.io/2019/07/20/JavaWeb08-web-xml%E4%B8%8Eserver-xml/"/>
-    <id>https://imwarhorse.github.io/2019/07/20/JavaWeb08-web-xml与server-xml/</id>
-    <published>2019-07-20T06:07:54.000Z</published>
-    <updated>2019-07-19T11:23:34.268Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。</p><h3 id="使用位置"><a href="#使用位置" class="headerlink" title="使用位置"></a>使用位置</h3><p>每个Web项目中。</p><p>Tomcat服务器中（在服务器目录conf目录中）。</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Web项目下的web.xml文件为局部配置，针对本项目的配置。</p><p>Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。</p><h3 id="内容（核心组件）"><a href="#内容（核心组件）" class="headerlink" title="内容（核心组件）"></a>内容（核心组件）</h3><ol><li>全局上下文配置（全局配置参数）；</li><li>Servlet配置；</li><li>过滤器配置；</li><li>监听器配置。</li></ol><h3 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h3><p>Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。</p><h3 id="加载时机"><a href="#加载时机" class="headerlink" title="加载时机"></a>加载时机</h3><p>服务器启动时。</p><h2 id="server-xml"><a href="#server-xml" class="headerlink" title="server.xml"></a>server.xml</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>了解server.xml文件的配置信息。</p><h3 id="内容-核心组件"><a href="#内容-核心组件" class="headerlink" title="内容(核心组件)"></a>内容(核心组件)</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Context</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h3><p>把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/项目别名"</span> <span class="attr">reloadable</span>=<span class="string">"false"</span> <span class="attr">docBase</span>=<span class="string">"需要进行热部署的项目的绝对路径，路径要到WebRoot"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。</p><blockquote><p>   注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;web-xml&quot;&gt;&lt;a href=&quot;#web-xml&quot; class=&quot;headerlink&quot; title=&quot;web.xml&quot;&gt;&lt;/a&gt;web.xml&lt;/h2&gt;&lt;h3 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作
-      
-    
-    </summary>
-    
-      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
-    
-    
-      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
-    
-      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
-    
-      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
-    
-  </entry>
   
   <entry>
     <title>JavaWeb13-JSP的九大内置对象及四个作用域对象</title>
@@ -175,6 +146,35 @@
       
       
         &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;在学了Servlet之后，使用Servlet进行页面的展现，代码书写过于麻烦。极大的影响了开发的效率，那么有没有一种方式可以让我们像以前写网
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb08-web.xml与server.xml</title>
+    <link href="https://imwarhorse.github.io/2019/02/20/JavaWeb08-web-xml%E4%B8%8Eserver-xml/"/>
+    <id>https://imwarhorse.github.io/2019/02/20/JavaWeb08-web-xml与server-xml/</id>
+    <published>2019-02-20T06:07:54.000Z</published>
+    <updated>2019-07-19T13:20:11.857Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。</p><h3 id="使用位置"><a href="#使用位置" class="headerlink" title="使用位置"></a>使用位置</h3><p>每个Web项目中。</p><p>Tomcat服务器中（在服务器目录conf目录中）。</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Web项目下的web.xml文件为局部配置，针对本项目的配置。</p><p>Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。</p><h3 id="内容（核心组件）"><a href="#内容（核心组件）" class="headerlink" title="内容（核心组件）"></a>内容（核心组件）</h3><ol><li>全局上下文配置（全局配置参数）；</li><li>Servlet配置；</li><li>过滤器配置；</li><li>监听器配置。</li></ol><h3 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h3><p>Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。</p><h3 id="加载时机"><a href="#加载时机" class="headerlink" title="加载时机"></a>加载时机</h3><p>服务器启动时。</p><h2 id="server-xml"><a href="#server-xml" class="headerlink" title="server.xml"></a>server.xml</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>了解server.xml文件的配置信息。</p><h3 id="内容-核心组件"><a href="#内容-核心组件" class="headerlink" title="内容(核心组件)"></a>内容(核心组件)</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Context</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h3><p>把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/项目别名"</span> <span class="attr">reloadable</span>=<span class="string">"false"</span> <span class="attr">docBase</span>=<span class="string">"需要进行热部署的项目的绝对路径，路径要到WebRoot"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。</p><blockquote><p>   注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;web-xml&quot;&gt;&lt;a href=&quot;#web-xml&quot; class=&quot;headerlink&quot; title=&quot;web.xml&quot;&gt;&lt;/a&gt;web.xml&lt;/h2&gt;&lt;h3 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作
       
     
     </summary>

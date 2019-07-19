@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[JavaWeb08-web.xml与server.xml]]></title>
-    <url>%2F2019%2F07%2F20%2FJavaWeb08-web-xml%E4%B8%8Eserver-xml%2F</url>
-    <content type="text"><![CDATA[web.xml作用存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。 使用位置每个Web项目中。 Tomcat服务器中（在服务器目录conf目录中）。 区别Web项目下的web.xml文件为局部配置，针对本项目的配置。 Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。 内容（核心组件） 全局上下文配置（全局配置参数）； Servlet配置； 过滤器配置； 监听器配置。 加载顺序Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。 加载时机服务器启动时。 server.xml问题浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？ 解决了解server.xml文件的配置信息。 内容(核心组件)1234567891011&lt;Server&gt; &lt;Service&gt; &lt;Connector /&gt; &lt;Connector /&gt; &lt;Engine&gt; &lt;Host&gt; &lt;Context /&gt; &lt;/Host&gt; &lt;/Engine&gt; &lt;/Service&gt;&lt;Server&gt; 热部署把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署： 1&lt;Context path="/项目别名" reloadable="false" docBase="需要进行热部署的项目的绝对路径，路径要到WebRoot" /&gt; 如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。 注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。]]></content>
-      <categories>
-        <category>JavaWeb</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Servlet</tag>
-        <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[JavaWeb13-JSP的九大内置对象及四个作用域对象]]></title>
     <url>%2F2019%2F02%2F22%2FJavaWeb13-JSP%E7%9A%84%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%9B%9B%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%AF%B9%E8%B1%A1%2F</url>
     <content type="text"><![CDATA[九大内置对象内置对象JSP文件在转译成其对应的Servlet文件的时候自动生成并声明的对象。我们在JSP页面中直接使用即可。 注意内置对象在JSP页面中使用，只能在局部代码块或者脚本段语句中使用，不能在全局代码块中使用。 因为JSP文件转译后所有的代码都在转译后的Servlet的service()方法下，而九大内置对象都声明在service()方法中，全局代码块无法访问。 pageContext对象 页面上下文对象，封存了其他内置对象。封存了当前jsp的运行信息。 注意每个JSP文件单独拥有一个pageContext对象。 作用域当前页面。 request对象 封存当前请求信息数据的对象。由Tomcat服务器创建。 作用域一次请求中。 Session对象 此对象是用来存储用户的不同请求的共享数据的。 作用域一次会话中。 application 此对象用来存储用户的不同请求的共享数据的。一个项目只有一个，存储所有用户共享数据的对象，以及完成其他操作（比如获取文件的绝对路径）。 作用域整个项目内。 response对象 用来响应请求处理结果给浏览器的对象。设置响应头，重定向。 out对象 响应对象，JSP内部使用，带有缓冲区的响应对象，效率高于response对象。 page对象 代表当前JSP的对象。相当于Java中的this。 exception对象 异常对象，存储了当前运行的异常信息。 注意：使用此对象需要在page指令中使用属性isErrorPage=”true”开启。 config对象 也就是ServletConfig，只要是用来获取web.xml中的配置数据，完成一些初始化数据的读取。 四个作用域pageContext作用域 当前页面。解决了当前页面内的数据共享问题。获取其他内置对象。 request作用域 一次请求。一个请求的Servlet的数据共享。通过请求转发将数据流转给下一个Servlet。 session作用域 一次会话。一个用户的不同请求的数据共享。将数据从一次请求流转给其他请求。 application作用域 项目内。不同用户的数据共享问题。将数据从一个用户的数据流转给其他用户。 作用数据流转。]]></content>
@@ -69,6 +56,19 @@
     <title><![CDATA[JavaWeb09-JSP的概念和运行原理]]></title>
     <url>%2F2019%2F02%2F21%2FJavaWeb09-JSP%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%2F</url>
     <content type="text"><![CDATA[问题在学了Servlet之后，使用Servlet进行页面的展现，代码书写过于麻烦。极大的影响了开发的效率，那么有没有一种方式可以让我们像以前写网页一样来进行网页的编程工作呢？ 解决使用JSP技术。 概念（了解）JSP全名为Java Server Page，中文名叫Java服务器页面，其根本是一个简化的Servlet设计，它是由Sun Microsystems公司提倡、许多公司参与的一起建立的一种动态网页技术标准。 在保留Servlet的优点的同时，可以让我们像以前编写HTML一样流畅的编写网页信息。也就是说，用JSP来进行网页信息的响应的话，它里面可以进行业务逻辑判断（不可取）。 特点 本质上还是Servlet（内部由JspServlet将JSP转义为Servlet）； 跨平台，一次编写到处运行； 组件跨平台； 健壮性和安全性。 JSP的访问原理浏览器发起请求，请求JSP，请求被Tomcat服务器接收，执行JspServlet，将请求的JSP文件转义成为对应的Java文件（也是Servlet），然后执行转义好的Java文件。 JSP的语法和指令 JSP的page指令 JSP的taglib指令 JSP的局部代码块 JSP的全局代码块 JSP的脚本段 JSP的注释 JSP的静态引入（JSP的include指令） JSP的动态引入 页面转发（forward标签） JSP的内置对象 PageContext对象 Request对象 Session对象 Application对象 Response对象 Out对象 Page对象 Exception对象 是否为动态网页的衡量标准：页面内数据数据是否会动态的更改。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb08-web.xml与server.xml]]></title>
+    <url>%2F2019%2F02%2F20%2FJavaWeb08-web-xml%E4%B8%8Eserver-xml%2F</url>
+    <content type="text"><![CDATA[web.xml作用存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。 使用位置每个Web项目中。 Tomcat服务器中（在服务器目录conf目录中）。 区别Web项目下的web.xml文件为局部配置，针对本项目的配置。 Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。 内容（核心组件） 全局上下文配置（全局配置参数）； Servlet配置； 过滤器配置； 监听器配置。 加载顺序Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。 加载时机服务器启动时。 server.xml问题浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？ 解决了解server.xml文件的配置信息。 内容(核心组件)1234567891011&lt;Server&gt; &lt;Service&gt; &lt;Connector /&gt; &lt;Connector /&gt; &lt;Engine&gt; &lt;Host&gt; &lt;Context /&gt; &lt;/Host&gt; &lt;/Engine&gt; &lt;/Service&gt;&lt;Server&gt; 热部署把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署： 1&lt;Context path="/项目别名" reloadable="false" docBase="需要进行热部署的项目的绝对路径，路径要到WebRoot" /&gt; 如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。 注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。]]></content>
       <categories>
         <category>JavaWeb</category>
       </categories>
