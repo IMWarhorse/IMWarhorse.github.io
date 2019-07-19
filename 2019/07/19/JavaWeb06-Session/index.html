@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta name="description" content="Session介绍和原理问题Request对象解决了一次请求内的不同Servlet之间的数据共享问题，那么一个用户的不同请求的处理需要使用相同的数据怎么办呢？ 解决Session。（HttpSession） 原理用户使用浏览器第一次向服务器发送请求，服务器在接收到请求后，调用对应的Servlet进行处理。在处理过程中会给用户创建一个Session对象，用来存储用户请求处理相关的公共数据，并将此Se">
 <meta name="keywords" content="Java,Servlet,Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaWeb03-Request对象和Response对象">
-<meta property="og:url" content="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/index.html">
+<meta property="og:title" content="JavaWeb06-Session">
+<meta property="og:url" content="https://imwarhorse.github.io/2019/07/19/JavaWeb06-Session/index.html">
 <meta property="og:site_name" content="War horse&#39;s blog">
-<meta property="og:description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta property="og:description" content="Session介绍和原理问题Request对象解决了一次请求内的不同Servlet之间的数据共享问题，那么一个用户的不同请求的处理需要使用相同的数据怎么办呢？ 解决Session。（HttpSession） 原理用户使用浏览器第一次向服务器发送请求，服务器在接收到请求后，调用对应的Servlet进行处理。在处理过程中会给用户创建一个Session对象，用来存储用户请求处理相关的公共数据，并将此Se">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T06:24:06.293Z">
+<meta property="og:updated_time" content="2019-07-19T07:34:00.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaWeb03-Request对象和Response对象">
-<meta name="twitter:description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta name="twitter:title" content="JavaWeb06-Session">
+<meta name="twitter:description" content="Session介绍和原理问题Request对象解决了一次请求内的不同Servlet之间的数据共享问题，那么一个用户的不同请求的处理需要使用相同的数据怎么办呢？ 解决Session。（HttpSession） 原理用户使用浏览器第一次向服务器发送请求，服务器在接收到请求后，调用对应的Servlet进行处理。在处理过程中会给用户创建一个Session对象，用来存储用户请求处理相关的公共数据，并将此Se">
 
 
 
@@ -166,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/">
+  <link rel="canonical" href="https://imwarhorse.github.io/2019/07/19/JavaWeb06-Session/">
 
 
 
 
 
-  <title>JavaWeb03-Request对象和Response对象 | War horse's blog</title>
+  <title>JavaWeb06-Session | War horse's blog</title>
   
 
 
@@ -341,7 +341,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/">
+    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/07/19/JavaWeb06-Session/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="War horse">
@@ -358,7 +358,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaWeb03-Request对象和Response对象</h1>
+          <h1 class="post-title" itemprop="name headline">JavaWeb06-Session</h1>
         
 
         <div class="post-meta">
@@ -370,8 +370,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-13T09:29:55+08:00">
-                2019-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T14:51:29+08:00">
+                2019-07-19
               </time>
             
 
@@ -430,76 +430,57 @@
       
 
       
-        <h2 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h2><ol>
-<li>从服务器启动后<strong>第一次调用</strong>到服务器关闭；</li>
-<li>如果Servlet在web.xml中配置了load-on-startup，生命周期为<strong>服务器启动</strong>到服务器关闭。<blockquote>
-<p>从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。</p>
+        <h2 id="Session介绍和原理"><a href="#Session介绍和原理" class="headerlink" title="Session介绍和原理"></a>Session介绍和原理</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Request对象解决了一次请求内的不同Servlet之间的数据共享问题，那么一个用户的不同请求的处理需要使用相同的数据怎么办呢？</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>Session。（HttpSession）</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>用户使用浏览器第一次向服务器发送请求，服务器在接收到请求后，调用对应的Servlet进行处理。在处理过程中会给用户创建一个Session对象，用来存储用户请求处理相关的公共数据，并将此Session对象的JSESSIONID以Cookie的形式存储在浏览器中（临时存储，浏览器关闭即时失效）。用户在发起第二次请求及后续请求时，请求信息会附带JSESSIONID，服务器进行处理时，会根据JSESSIONID返回对应的对象，这样就取到需要用的数据。每个用户的JSESSIONID是不同的，这样就可以识别发送请求的是哪一个具体的用户。</p>
+<h2 id="Session的特点和使用"><a href="#Session的特点和使用" class="headerlink" title="Session的特点和使用"></a>Session的特点和使用</h2><h3 id="内部实现原理"><a href="#内部实现原理" class="headerlink" title="内部实现原理"></a>内部实现原理</h3><p>用户第一次访问服务器，服务器会创建一个session对象给此用户，并将给session对象的JSESSIONID使用Cookie技术存储到浏览器，保证用户的其他请求能够获取到同一个session对象，也保证了同一用户不同请求能够获取到共享的数据。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>Session技术是依赖Cookie技术的<strong>服务端的存储技术</strong>。</p>
+<p>​    注：<br>​        Cookie：浏览器端的数据存储技术。<br>​        Session：服务器端的数据存储技术。</p>
+<p>由服务器完成创建。</p>
+<p>Session依赖于Cookie技术。<br>    以为Session创建好了，要一只伴随该用户的请求来使用的话，需要在每次请求都带着该用户的Session的唯一标识符（JSESSIONID）使用。</p>
+<p>作用在一次会话中。（<strong>作用域</strong>）</p>
+<p>每个用户独立拥有一个Session。</p>
+<p>默认存储时间为30分钟。</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>解决了一个用户的不同请求的数据共享问题。</p>
+<blockquote>
+<p>  每个新产品或新技术的出现都是为了解决现有的痛点。</p>
 </blockquote>
-</li>
-</ol>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执行。</p>
-<p>destroy()方法是在Servlet被销毁时执行，也就是服务器关闭时。</p>
-<h2 id="service-方法、doGet-方法以及doPost-方法的使用和区别"><a href="#service-方法、doGet-方法以及doPost-方法的使用和区别" class="headerlink" title="service()方法、doGet()方法以及doPost()方法的使用和区别"></a>service()方法、doGet()方法以及doPost()方法的使用和区别</h2><ul>
-<li>service()：不管是get方式还是post方式，如果Servlet类中有service()方法，则优先调用service()方法。但是，不推荐重写service()方法。</li>
-<li>doGet()：在没有service()方法的情况下，如果请求方式是get，则调用该处理请求的方法。</li>
-<li>doPost()：在没有service()方法的情况下，如果请求方式是post，则调用该处理请求的方法。</li>
-</ul>
-<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>如果在重写的service()方法中调用了父类的service()方法（super.service(arg0, arg1)），则service方法处理完后，会再次根据请求方式响应doGet()或doPost()方法执行。所以，一般情况下，我们是不在重写的service()方法中调用父类的service()方法的，避免出现405错误。</p>
-<h3 id="扩展：常见错误状态码"><a href="#扩展：常见错误状态码" class="headerlink" title="扩展：常见错误状态码"></a>扩展：常见错误状态码</h3><p>404错误：资源未找到。</p>
-<ul>
-<li>原因一：在请求地址中的Servlet别名书写错误。</li>
-<li>原因二：虚拟项目名称拼写错误。</li>
-</ul>
-<p>500错误：内部服务器错误</p>
-<ul>
-<li>错误一：找不到web.xml中配置的url-pattern所映射的servlet类(配置错误，ClassNotFound)<ul>
-<li>解决：在web.xml中校验servlet类的全限定路径是否拼写错误。</li>
-</ul>
-</li>
-<li>错误二：因为处理请求的方法(service方法\doGet方法\doPost方法)中的代码执行错误导致。<ul>
-<li>解决：根据错误提示对处理请求的方法体中的代码进行错误排查并更改。</li>
-</ul>
-</li>
-</ul>
-<p>405错误：请求方式不支持</p>
-<p>原因：请求方式和servlet中的方法不匹配所导致。<br>解决：</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>创建Session对象/获取Session对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  如果请求中拥有Session的唯一标识符（JSESSIONID），则返回对应的Session对象；</p>
+<p>  如果请求中没有Session的唯一标识符（JSESSIONID），则创建新的Session对象并将其JSESSIONID作为Cookie数据存储到浏览器内存中（关闭浏览器JSESSIONID失效）。</p>
+</blockquote>
+<p>设置Session存储时间</p>
 <ol>
-<li>使用service()方法进行请求处理(不推荐)，并不在service()方法中直接使用父类的service()方法</li>
-<li>重写doGet()和doPost()方法，并准确根据请求方式进行所重写方法的代码编写</li>
-</ol>
-<h2 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求到服务器，会遵循HTTP协议将请求数据发送到服务器。那么服务器收到的请求该怎么存储呢？不但要存，而且要保证完整性。</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>使用对象存储，服务器每接收一个请求，就创建一个对象专门存储此次请求数据。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>Request对象。</p>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>服务器在接收到浏览器的请求后，会创建一个request对象，对象中存储了此次请求相关的请求数据。服务器在调用Servlet时将创建的request对象作为实参传递给Servlet的方法，比如：service()方法。</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>request对象中封存了当前请求的所有请求信息。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>获取请求头数据：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取请求方式</span></span><br><span class="line">request.getMethod();</span><br><span class="line"><span class="comment">// 获取请求URL</span></span><br><span class="line">request.getRequestURL();</span><br><span class="line"><span class="comment">// 获取请求URI</span></span><br><span class="line">request.getRequestURI();</span><br><span class="line"><span class="comment">// 获取请求协议</span></span><br><span class="line">request.getScheme();</span><br></pre></td></tr></table></figure>
-
-<p>获取请求行数据：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定的请求头信息</span></span><br><span class="line">request.getHeader(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回请求头的枚举集合</span></span><br><span class="line">request.getHeaderNames();</span><br></pre></td></tr></table></figure>
-
-<p>获取用户数据（核心）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定的用户数据</span></span><br><span class="line">request.getParameter(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回同键不同值的请求数据(多用于多选按钮)，返回的数组</span></span><br><span class="line">request.getParameterValues(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回所有用户请求数据的枚举集合</span></span><br><span class="line">request.getParameterNames();</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>如果要获取的请求数据不存在，不会报错，会返回null。</li>
-<li>request对象由tomcat服务器创建，并作为实际参数传递给处理请求的servlet的处理请求的方法。</li>
-</ol>
-<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>一个用来将数据响应到浏览器的对象。</p>
-<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置响应头</span></span><br><span class="line">response.setHeader(String name,String value);<span class="comment">// 在响应头中添加信息，但是同键会覆盖。</span></span><br><span class="line">response.addHeader(String name,String value);<span class="comment">// 在响应头中添加响应信息，但是不会覆盖。</span></span><br><span class="line"><span class="comment">// 设置响应状态</span></span><br><span class="line">response.sendError(<span class="keyword">int</span> num, String msg);<span class="comment">// 自定义响应状态码</span></span><br><span class="line"><span class="comment">// 设置响应实体(核心)</span></span><br><span class="line">response.getWriter().write(String str);<span class="comment">// 响应具体的数据给浏览器</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置响应编码格式"><a href="#设置响应编码格式" class="headerlink" title="设置响应编码格式"></a>设置响应编码格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(“text/html;charset=utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>service()方法请求处理代码流程：</p>
-<ul>
-<li>设置响应编码格式</li>
-<li>获取请求数据</li>
-<li>处理请求数据<ul>
-<li>数据库操作（MVC思想）</li>
-</ul>
+<li><p>单个Session设置存储时间：session.setMaxInactiveInterval(int seconds);</p>
 </li>
-<li>响应处理结果</li>
-</ul>
+<li><p>服务器内所有项目的公共配置<br>在Tomcat的路径下找到web.xml配置文件（路径：%TOMCAT_HOME%\conf\web.xml），使用文本编辑器打开，找到如下配置并进行更改：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 注意单位为分钟 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单个项目的配置<br>在项目的web.xml配置文件中添加如下配置信息即可：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 注意单位为分钟 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>注意：</p>
+<p>​    在有效存储时间内如果再次发起请求则会重新计算存储时间；<br>​    而在有效存储时间内未再次发起请求则该Session对象失效。</p>
+<p>设置Session强制失效（即使Session还未失效，也要强制删除Session对象）：<br>    使用场景举例：用户点击“登出\退出”的时候。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.invalidate();</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>只要不关闭浏览器，并且Session不失效的情况下，同一个用户的任意请求在项目的任意Servlet中获取到的都是同一个Session对象。</p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>一次对话。<br>    或者可以说：在JSESSIONID和Session对象不失效的情况下，它的作用域为整个项目。</p>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><p>用户什么时候能获取到Session？</p>
+<p>什么时候会获取到新的Session？</p>
+<p>Session什么时候失效？</p>
+<h2 id="Session的数据流转和总结"><a href="#Session的数据流转和总结" class="headerlink" title="Session的数据流转和总结"></a>Session的数据流转和总结</h2><h3 id="存储和获取数据"><a href="#存储和获取数据" class="headerlink" title="存储和获取数据"></a>存储和获取数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 存储</span><br><span class="line">session.setAttribute(String name, Object value);</span><br><span class="line">// 获取</span><br><span class="line">session.getAttribute(String name);	// 返回的数据类型为Object</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  注意：存储的动作和取出的动作发生在不同请求中，但是存储要先于取出。</p>
+</blockquote>
+<h3 id="Session的使用时机"><a href="#Session的使用时机" class="headerlink" title="Session的使用时机"></a>Session的使用时机</h3><p>一般用户在登录web项目时会将个人信息存储到Session中，供该用户的其他请求使用。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Session解决了一个用户在不同请求的数据共享问题，只要JSESSIONID不失效和Session对象不失效的情况下，用户的任意请求在处理时都能获取到同一个Session对象。</p>
 
       
     </div>
@@ -534,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/" rel="next" title="[经验分享]保证Cookie自动登录信息安全的方法">
-                <i class="fa fa-chevron-left"></i> [经验分享]保证Cookie自动登录信息安全的方法
+              <a href="/2019/01/17/JavaWeb05-Cookie/" rel="next" title="JavaWeb05-Cookie">
+                <i class="fa fa-chevron-left"></i> JavaWeb05-Cookie
               </a>
             
           </div>
@@ -543,10 +524,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/15/JavaWeb04-请求转发、重定向/" rel="prev" title="JavaWeb04-请求转发、重定向">
-                JavaWeb04-请求转发、重定向 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -717,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet的生命周期"><span class="nav-number">1.</span> <span class="nav-text">Servlet的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service-方法、doGet-方法以及doPost-方法的使用和区别"><span class="nav-number">2.</span> <span class="nav-text">service()方法、doGet()方法以及doPost()方法的使用和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">2.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展：常见错误状态码"><span class="nav-number">2.2.</span> <span class="nav-text">扩展：常见错误状态码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request对象"><span class="nav-number">3.</span> <span class="nav-text">Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">3.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">3.4.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">3.5.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.6.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-2"><span class="nav-number">3.7.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response对象"><span class="nav-number">4.</span> <span class="nav-text">Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用-1"><span class="nav-number">4.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">4.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置响应编码格式"><span class="nav-number">4.3.</span> <span class="nav-text">设置响应编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Session介绍和原理"><span class="nav-number">1.</span> <span class="nav-text">Session介绍和原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.3.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session的特点和使用"><span class="nav-number">2.</span> <span class="nav-text">Session的特点和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内部实现原理"><span class="nav-number">2.1.</span> <span class="nav-text">内部实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">2.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.3.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.4.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.5.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">2.6.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点"><span class="nav-number">2.7.</span> <span class="nav-text">重点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session的数据流转和总结"><span class="nav-number">3.</span> <span class="nav-text">Session的数据流转和总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储和获取数据"><span class="nav-number">3.1.</span> <span class="nav-text">存储和获取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的使用时机"><span class="nav-number">3.2.</span> <span class="nav-text">Session的使用时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

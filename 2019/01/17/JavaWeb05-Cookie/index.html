@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta name="description" content="Cookie介绍及使用（创建和设置有效期）Cookie的作用解决了发送的不同请求之间的数据共享问题。 注意 Cookie不能存中文。要我Cookie封装在响应头和请求行里，HTTP响应头和请求行中不能有中文。 Cookie不安全。 一个Cookie对象存储一条数据，多条数据需要多创建几个Cookie对象进行存储。  使用Cookie的创建和存储 123456789// 创建Cookie对象Cook">
 <meta name="keywords" content="Java,Servlet,Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaWeb03-Request对象和Response对象">
-<meta property="og:url" content="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/index.html">
+<meta property="og:title" content="JavaWeb05-Cookie">
+<meta property="og:url" content="https://imwarhorse.github.io/2019/01/17/JavaWeb05-Cookie/index.html">
 <meta property="og:site_name" content="War horse&#39;s blog">
-<meta property="og:description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta property="og:description" content="Cookie介绍及使用（创建和设置有效期）Cookie的作用解决了发送的不同请求之间的数据共享问题。 注意 Cookie不能存中文。要我Cookie封装在响应头和请求行里，HTTP响应头和请求行中不能有中文。 Cookie不安全。 一个Cookie对象存储一条数据，多条数据需要多创建几个Cookie对象进行存储。  使用Cookie的创建和存储 123456789// 创建Cookie对象Cook">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T06:24:06.293Z">
+<meta property="og:updated_time" content="2019-07-19T06:49:12.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaWeb03-Request对象和Response对象">
-<meta name="twitter:description" content="Servlet的生命周期 从服务器启动后第一次调用到服务器关闭； 如果Servlet在web.xml中配置了load-on-startup，生命周期为服务器启动到服务器关闭。 从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。    注意init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执">
+<meta name="twitter:title" content="JavaWeb05-Cookie">
+<meta name="twitter:description" content="Cookie介绍及使用（创建和设置有效期）Cookie的作用解决了发送的不同请求之间的数据共享问题。 注意 Cookie不能存中文。要我Cookie封装在响应头和请求行里，HTTP响应头和请求行中不能有中文。 Cookie不安全。 一个Cookie对象存储一条数据，多条数据需要多创建几个Cookie对象进行存储。  使用Cookie的创建和存储 123456789// 创建Cookie对象Cook">
 
 
 
@@ -166,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/">
+  <link rel="canonical" href="https://imwarhorse.github.io/2019/01/17/JavaWeb05-Cookie/">
 
 
 
 
 
-  <title>JavaWeb03-Request对象和Response对象 | War horse's blog</title>
+  <title>JavaWeb05-Cookie | War horse's blog</title>
   
 
 
@@ -341,7 +341,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/01/13/JavaWeb03-Request对象和Response对象/">
+    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/01/17/JavaWeb05-Cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="War horse">
@@ -358,7 +358,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaWeb03-Request对象和Response对象</h1>
+          <h1 class="post-title" itemprop="name headline">JavaWeb05-Cookie</h1>
         
 
         <div class="post-meta">
@@ -370,8 +370,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-13T09:29:55+08:00">
-                2019-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T11:32:50+08:00">
+                2019-01-17
               </time>
             
 
@@ -430,75 +430,24 @@
       
 
       
-        <h2 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h2><ol>
-<li>从服务器启动后<strong>第一次调用</strong>到服务器关闭；</li>
-<li>如果Servlet在web.xml中配置了load-on-startup，生命周期为<strong>服务器启动</strong>到服务器关闭。<blockquote>
-<p>从第一次调用，到服务器关闭。如果在web.xml中配置了load-on-startup则是从服务器启动到服务器关闭。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>init()方法是对Servlet进行初始化的一个方法，会在Servlet第一次加载进入内存时执行。</p>
-<p>destroy()方法是在Servlet被销毁时执行，也就是服务器关闭时。</p>
-<h2 id="service-方法、doGet-方法以及doPost-方法的使用和区别"><a href="#service-方法、doGet-方法以及doPost-方法的使用和区别" class="headerlink" title="service()方法、doGet()方法以及doPost()方法的使用和区别"></a>service()方法、doGet()方法以及doPost()方法的使用和区别</h2><ul>
-<li>service()：不管是get方式还是post方式，如果Servlet类中有service()方法，则优先调用service()方法。但是，不推荐重写service()方法。</li>
-<li>doGet()：在没有service()方法的情况下，如果请求方式是get，则调用该处理请求的方法。</li>
-<li>doPost()：在没有service()方法的情况下，如果请求方式是post，则调用该处理请求的方法。</li>
+        <h2 id="Cookie介绍及使用（创建和设置有效期）"><a href="#Cookie介绍及使用（创建和设置有效期）" class="headerlink" title="Cookie介绍及使用（创建和设置有效期）"></a>Cookie介绍及使用（创建和设置有效期）</h2><h3 id="Cookie的作用"><a href="#Cookie的作用" class="headerlink" title="Cookie的作用"></a>Cookie的作用</h3><p>解决了发送的不同请求之间的数据共享问题。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>Cookie不能存中文。要我Cookie封装在响应头和请求行里，HTTP响应头和请求行中不能有中文。</li>
+<li>Cookie不安全。</li>
+<li>一个Cookie对象存储一条数据，多条数据需要多创建几个Cookie对象进行存储。</li>
 </ul>
-<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>如果在重写的service()方法中调用了父类的service()方法（super.service(arg0, arg1)），则service方法处理完后，会再次根据请求方式响应doGet()或doPost()方法执行。所以，一般情况下，我们是不在重写的service()方法中调用父类的service()方法的，避免出现405错误。</p>
-<h3 id="扩展：常见错误状态码"><a href="#扩展：常见错误状态码" class="headerlink" title="扩展：常见错误状态码"></a>扩展：常见错误状态码</h3><p>404错误：资源未找到。</p>
-<ul>
-<li>原因一：在请求地址中的Servlet别名书写错误。</li>
-<li>原因二：虚拟项目名称拼写错误。</li>
-</ul>
-<p>500错误：内部服务器错误</p>
-<ul>
-<li>错误一：找不到web.xml中配置的url-pattern所映射的servlet类(配置错误，ClassNotFound)<ul>
-<li>解决：在web.xml中校验servlet类的全限定路径是否拼写错误。</li>
-</ul>
-</li>
-<li>错误二：因为处理请求的方法(service方法\doGet方法\doPost方法)中的代码执行错误导致。<ul>
-<li>解决：根据错误提示对处理请求的方法体中的代码进行错误排查并更改。</li>
-</ul>
-</li>
-</ul>
-<p>405错误：请求方式不支持</p>
-<p>原因：请求方式和servlet中的方法不匹配所导致。<br>解决：</p>
-<ol>
-<li>使用service()方法进行请求处理(不推荐)，并不在service()方法中直接使用父类的service()方法</li>
-<li>重写doGet()和doPost()方法，并准确根据请求方式进行所重写方法的代码编写</li>
-</ol>
-<h2 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求到服务器，会遵循HTTP协议将请求数据发送到服务器。那么服务器收到的请求该怎么存储呢？不但要存，而且要保证完整性。</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>使用对象存储，服务器每接收一个请求，就创建一个对象专门存储此次请求数据。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>Request对象。</p>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>服务器在接收到浏览器的请求后，会创建一个request对象，对象中存储了此次请求相关的请求数据。服务器在调用Servlet时将创建的request对象作为实参传递给Servlet的方法，比如：service()方法。</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>request对象中封存了当前请求的所有请求信息。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>获取请求头数据：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取请求方式</span></span><br><span class="line">request.getMethod();</span><br><span class="line"><span class="comment">// 获取请求URL</span></span><br><span class="line">request.getRequestURL();</span><br><span class="line"><span class="comment">// 获取请求URI</span></span><br><span class="line">request.getRequestURI();</span><br><span class="line"><span class="comment">// 获取请求协议</span></span><br><span class="line">request.getScheme();</span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>Cookie的创建和存储</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Cookie对象</span></span><br><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(String cookieName, String value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置Cookie</span></span><br><span class="line">cookie.setMaxAge(<span class="keyword">int</span> expiry);	<span class="comment">// 设置Cookie存储时间（注：expiry单位为秒）</span></span><br><span class="line">cookie.setPath(String uri);	<span class="comment">// 设置Cookir的请求路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应Cookie对象给客户端</span></span><br><span class="line">response.addCookie(Cookie cookie);</span><br></pre></td></tr></table></figure>
 
-<p>获取请求行数据：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定的请求头信息</span></span><br><span class="line">request.getHeader(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回请求头的枚举集合</span></span><br><span class="line">request.getHeaderNames();</span><br></pre></td></tr></table></figure>
+<p>Cookie的获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取Cookie信息数组</span></span><br><span class="line">Cookie[] cookies = response.getCookies();</span><br><span class="line"><span class="comment">// 遍历Cookie信息数组（使用for循环遍历即可）</span></span><br><span class="line"><span class="keyword">for</span> (Cookie ck : cookies) &#123;</span><br><span class="line">    String name = ck.getName();</span><br><span class="line">    String value = ck.getValie();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>获取用户数据（核心）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定的用户数据</span></span><br><span class="line">request.getParameter(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回同键不同值的请求数据(多用于多选按钮)，返回的数组</span></span><br><span class="line">request.getParameterValues(<span class="string">"键名"</span>);</span><br><span class="line"><span class="comment">// 返回所有用户请求数据的枚举集合</span></span><br><span class="line">request.getParameterNames();</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>如果要获取的请求数据不存在，不会报错，会返回null。</li>
-<li>request对象由tomcat服务器创建，并作为实际参数传递给处理请求的servlet的处理请求的方法。</li>
-</ol>
-<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>一个用来将数据响应到浏览器的对象。</p>
-<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置响应头</span></span><br><span class="line">response.setHeader(String name,String value);<span class="comment">// 在响应头中添加信息，但是同键会覆盖。</span></span><br><span class="line">response.addHeader(String name,String value);<span class="comment">// 在响应头中添加响应信息，但是不会覆盖。</span></span><br><span class="line"><span class="comment">// 设置响应状态</span></span><br><span class="line">response.sendError(<span class="keyword">int</span> num, String msg);<span class="comment">// 自定义响应状态码</span></span><br><span class="line"><span class="comment">// 设置响应实体(核心)</span></span><br><span class="line">response.getWriter().write(String str);<span class="comment">// 响应具体的数据给浏览器</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置响应编码格式"><a href="#设置响应编码格式" class="headerlink" title="设置响应编码格式"></a>设置响应编码格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(“text/html;charset=utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>service()方法请求处理代码流程：</p>
-<ul>
-<li>设置响应编码格式</li>
-<li>获取请求数据</li>
-<li>处理请求数据<ul>
-<li>数据库操作（MVC思想）</li>
-</ul>
-</li>
-<li>响应处理结果</li>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>Cookie是<strong>浏览器端的数据存储技术</strong>；</li>
+<li>存储的数据声明在服务器端；</li>
+<li>临时存储：存储在浏览器的运行内存中，浏览器关闭即失效；</li>
+<li>定时存储：设置了Cookie的有效期，存储在客户端的硬盘中，在有效期内，符合路径要求的都会附带该信息；</li>
+<li>默认Cookie信息存储好之后，每次请求都会附带，除非设置请求路径。</li>
 </ul>
 
       
@@ -534,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/12/经验分享-保证Cookie自动登录信息安全的方法/" rel="next" title="[经验分享]保证Cookie自动登录信息安全的方法">
-                <i class="fa fa-chevron-left"></i> [经验分享]保证Cookie自动登录信息安全的方法
+              <a href="/2019/01/15/JavaWeb04-请求转发、重定向/" rel="next" title="JavaWeb04-请求转发、重定向">
+                <i class="fa fa-chevron-left"></i> JavaWeb04-请求转发、重定向
               </a>
             
           </div>
@@ -544,8 +493,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/15/JavaWeb04-请求转发、重定向/" rel="prev" title="JavaWeb04-请求转发、重定向">
-                JavaWeb04-请求转发、重定向 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/19/JavaWeb06-Session/" rel="prev" title="JavaWeb06-Session">
+                JavaWeb06-Session <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -717,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet的生命周期"><span class="nav-number">1.</span> <span class="nav-text">Servlet的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service-方法、doGet-方法以及doPost-方法的使用和区别"><span class="nav-number">2.</span> <span class="nav-text">service()方法、doGet()方法以及doPost()方法的使用和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">2.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展：常见错误状态码"><span class="nav-number">2.2.</span> <span class="nav-text">扩展：常见错误状态码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request对象"><span class="nav-number">3.</span> <span class="nav-text">Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">3.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">3.4.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">3.5.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.6.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-2"><span class="nav-number">3.7.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response对象"><span class="nav-number">4.</span> <span class="nav-text">Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用-1"><span class="nav-number">4.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">4.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置响应编码格式"><span class="nav-number">4.3.</span> <span class="nav-text">设置响应编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie介绍及使用（创建和设置有效期）"><span class="nav-number">1.</span> <span class="nav-text">Cookie介绍及使用（创建和设置有效期）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的作用"><span class="nav-number">1.1.</span> <span class="nav-text">Cookie的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.3.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.4.</span> <span class="nav-text">特点</span></a></li></ol></li></ol></div>
             
 
           </div>
