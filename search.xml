@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JavaWeb08-web.xml与server.xml]]></title>
+    <url>%2F2019%2F07%2F20%2FJavaWeb08-web-xml%E4%B8%8Eserver-xml%2F</url>
+    <content type="text"><![CDATA[web.xml作用存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。 使用位置每个Web项目中。 Tomcat服务器中（在服务器目录conf目录中）。 区别Web项目下的web.xml文件为局部配置，针对本项目的配置。 Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。 内容（核心组件） 全局上下文配置（全局配置参数）； Servlet配置； 过滤器配置； 监听器配置。 加载顺序Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。 加载时机服务器启动时。 server.xml问题浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？ 解决了解server.xml文件的配置信息。 内容(核心组件)1234567891011&lt;Server&gt; &lt;Service&gt; &lt;Connector /&gt; &lt;Connector /&gt; &lt;Engine&gt; &lt;Host&gt; &lt;Context /&gt; &lt;/Host&gt; &lt;/Engine&gt; &lt;/Service&gt;&lt;Server&gt; 热部署把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署： 1&lt;Context path="/项目别名" reloadable="false" docBase="需要进行热部署的项目的绝对路径，路径要到WebRoot" /&gt; 如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。 注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb13-JSP的九大内置对象及四个作用域对象]]></title>
+    <url>%2F2019%2F02%2F22%2FJavaWeb13-JSP%E7%9A%84%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%9B%9B%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[九大内置对象内置对象JSP文件在转译成其对应的Servlet文件的时候自动生成并声明的对象。我们在JSP页面中直接使用即可。 注意内置对象在JSP页面中使用，只能在局部代码块或者脚本段语句中使用，不能在全局代码块中使用。 因为JSP文件转译后所有的代码都在转译后的Servlet的service()方法下，而九大内置对象都声明在service()方法中，全局代码块无法访问。 pageContext对象 页面上下文对象，封存了其他内置对象。封存了当前jsp的运行信息。 注意每个JSP文件单独拥有一个pageContext对象。 作用域当前页面。 request对象 封存当前请求信息数据的对象。由Tomcat服务器创建。 作用域一次请求中。 Session对象 此对象是用来存储用户的不同请求的共享数据的。 作用域一次会话中。 application 此对象用来存储用户的不同请求的共享数据的。一个项目只有一个，存储所有用户共享数据的对象，以及完成其他操作（比如获取文件的绝对路径）。 作用域整个项目内。 response对象 用来响应请求处理结果给浏览器的对象。设置响应头，重定向。 out对象 响应对象，JSP内部使用，带有缓冲区的响应对象，效率高于response对象。 page对象 代表当前JSP的对象。相当于Java中的this。 exception对象 异常对象，存储了当前运行的异常信息。 注意：使用此对象需要在page指令中使用属性isErrorPage=”true”开启。 config对象 也就是ServletConfig，只要是用来获取web.xml中的配置数据，完成一些初始化数据的读取。 四个作用域pageContext作用域 当前页面。解决了当前页面内的数据共享问题。获取其他内置对象。 request作用域 一次请求。一个请求的Servlet的数据共享。通过请求转发将数据流转给下一个Servlet。 session作用域 一次会话。一个用户的不同请求的数据共享。将数据从一次请求流转给其他请求。 application作用域 项目内。不同用户的数据共享问题。将数据从一个用户的数据流转给其他用户。 作用数据流转。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb12-JSP的静/动态引入及forward转发标签]]></title>
+    <url>%2F2019%2F02%2F21%2FJavaWeb12-JSP%E7%9A%84%E9%9D%99-%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%E5%8F%8Aforward%E8%BD%AC%E5%8F%91%E6%A0%87%E7%AD%BE%2F</url>
+    <content type="text"><![CDATA[静态引入使用1&lt;%@include file="要引入的jsp文件的相对路径" %&gt; 特点 会将引入的jsp文件和当前jsp文件转译成一个Java（Servlet）文件使用； 在网页中也就显示处了合并后的显示效果。 注意静态引入的jsp文件不会单独转译成Java（Servlet）文件。 当前文件和静态引入的jsp文件不能够使用Java代码声明同名变量。 动态引入使用1&lt;jsp:include page="要引入的jsp文件的相对路径"&gt;&lt;/jsp:include&gt; 特点 会将引入的jsp文件单独编译，在当前文件编译好的Java文件中调用引入的jsp文件的编译文件。 在网页中显示合并后的显示效果。 注意动态引入允许文件中声明同名变量。 静态引入和动态引入的优点：降低jsp代码的冗余，便于维护升级。 forward转发标签使用1&lt;jsp:forward page="要转发的jsp文件的相对路径"&gt;&lt;/jsp:forward&gt; 特点 一次请求； 地址栏信息不改变。 注意在转发标签的闭合标签中间除了写&lt;jsp:param value=”” name=”” /&gt;不会报错，其他的任意字符都会报错，包括空格。 name属性为附带的数据的键名。 value为附带的数据内容。 转发时会将数据以?的形式拼接在转发路径的后面。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb11-JSP之代码块]]></title>
+    <url>%2F2019%2F02%2F21%2FJavaWeb11-JSP%E4%B9%8B%E4%BB%A3%E7%A0%81%E5%9D%97%2F</url>
+    <content type="text"><![CDATA[局部代码块特点局部代码块中声明的Java代码会被原样转译到jsp对应的Servlet文件的_JspService()方法中。 代码块中声明的变量都是局部变量。 使用1&lt;% Java代码 %&gt; 缺点使用局部代码块在jsp中进行逻辑判断，书写麻烦，阅读困难。 使用时机尽量少在jsp中加入逻辑代码。 开发中，Servler进行请求逻辑处理，使用jsp进行页面展现。 全局代码块特点声明的Java代码作为全局代码转译到对应的Servlet类中。 使用1&lt;%! 全局代码 %&gt; 注意全局代码块声明的代码，需要使用局部代码块调用。 脚本段语句特点帮助我们快速的获取变量和方法的返回值响应给浏览器。 使用1&lt;%= 变量名或方法 %&gt; 注意不要再变量名或方法后使用分号。 位置除了JSP语法要求以外的任何位置都可以写。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb10-JSP之page指令]]></title>
+    <url>%2F2019%2F02%2F21%2FJavaWeb10-JSP%E4%B9%8Bpage%E6%8C%87%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[JSP的注释前端语言注释会被转译，也会被发送，但是不会被浏览器执行。 1&lt;!-- --&gt; Java语言注释会被转译，但是不会被Servlet执行。 123// /**//***/ JSP注释不会被转译。 1&lt;%-- --%&gt; page指令1&lt;% page 属性名="属性值" 属性名="属性值"...%&gt; 属性 language：声明JSP被转译的语言。通常是值为java。 import：声明转译的java文件要导入的包，不同的包使用英文逗号隔开。 pageEncoding：设置JSP文件的数据编码格式。 contentType：设置JSP数据响应给浏览器时，浏览器的解析和编码格式。举例：”text/html;charset=utf-8”。 session：设置转译的Servlet中是否开启Session支持，默认开启。true表示开启，false表示关闭。 errorPage：设置JSP运行错误后跳转的页面。 extends：设置JSP转译的Java文件要继承的父类。 作用page指令的作用就是配置jsp文件的转译相关的参数。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaWeb09-JSP的概念和运行原理]]></title>
+    <url>%2F2019%2F02%2F21%2FJavaWeb09-JSP%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[问题在学了Servlet之后，使用Servlet进行页面的展现，代码书写过于麻烦。极大的影响了开发的效率，那么有没有一种方式可以让我们像以前写网页一样来进行网页的编程工作呢？ 解决使用JSP技术。 概念（了解）JSP全名为Java Server Page，中文名叫Java服务器页面，其根本是一个简化的Servlet设计，它是由Sun Microsystems公司提倡、许多公司参与的一起建立的一种动态网页技术标准。 在保留Servlet的优点的同时，可以让我们像以前编写HTML一样流畅的编写网页信息。也就是说，用JSP来进行网页信息的响应的话，它里面可以进行业务逻辑判断（不可取）。 特点 本质上还是Servlet（内部由JspServlet将JSP转义为Servlet）； 跨平台，一次编写到处运行； 组件跨平台； 健壮性和安全性。 JSP的访问原理浏览器发起请求，请求JSP，请求被Tomcat服务器接收，执行JspServlet，将请求的JSP文件转义成为对应的Java文件（也是Servlet），然后执行转义好的Java文件。 JSP的语法和指令 JSP的page指令 JSP的taglib指令 JSP的局部代码块 JSP的全局代码块 JSP的脚本段 JSP的注释 JSP的静态引入（JSP的include指令） JSP的动态引入 页面转发（forward标签） JSP的内置对象 PageContext对象 Request对象 Session对象 Application对象 Response对象 Out对象 Page对象 Exception对象 是否为动态网页的衡量标准：页面内数据数据是否会动态的更改。]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JavaWeb07-ServletContext及ServletConfig对象]]></title>
     <url>%2F2019%2F02%2F20%2FJavaWeb07-ServletContext%E5%8F%8AServletConfig%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"><![CDATA[ServletContext对象问题Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？ 解决ServletContext对象。 每次写“解决”这一项的时候总感觉自己在说废话…… 作用解决不同用户间的数据共享问题。 原理ServletContext对象由服务器进行创建，一个项目只有一个ServletContext对象。不管在项目的任意位置进行获取得到的都是同一个ServletContext对象，那么不同用户发起的请求获取到的也就是同一个对象了，该对象由所有用户共同拥有。 特点由服务器创建； 用户共享； 一个项目只有一个。 生命周期服务器启动到服务器关闭 作用域整个项目内 使用获取ServletContext对象： 123456// 第一种（常用）ServletContext context = this.getServletContext();// 第二种（特殊情况下使用）ServletContext context = this.getServletConfig.getServletContext();// 第三种（常用）ServletContext context = request.getSession().getServletContext(); 使用ServletContext对象完成数据共享： 1234// 数据存储context.setAttribute(String name, Object value);// 数据获取context.getAttribute(String name); 注意：不同的用户可以给ServletContext对象进行数据存取。 获取项目中web.xml文件中的全局配置数据： 12345// 根据键的名字返回web.xml中适配的全局数据的值，返回String类型。如果不存在则返回null。context.getInitParameter(String name);// 返回键名的枚举context.getInitParameterNames(); web.xml中配置全局数据的方式（适用于所有XML）： 1234&lt;context-param&gt; &lt;param-name&gt;name&lt;/param-name&gt; &lt;param-value&gt;Edward&lt;/param-value&gt;&lt;/context-param&gt; 注意：一组&lt;context-param&gt;标签只能存储一组键值对数据，多组可以声明多个&lt;context-param&gt;进行存储。 作用：将静态数据和代码进行解耦。 获取项目WebRoot下的资源的绝对路径： 12// 获取的路径为项目根路径，path参数为项目根目录下的路径。String path = context.getRealPath(String path); 获取WebRoot下的资源的流对象： 1InputStream is = context.getResourceAsStream(String path); 注意：此种方式只能获取项目根目录下的资源流对象，class文件的流对象需要使用类加载器获取。 path参数为项目根目录下的路径。 ServletConfig对象问题在使用ServletContext对象获取web.xml中的全局配置文件，在web.xml中，每个Servlet也可以进行单独的配置，那么该怎么获取配置信息？ 解决使用ServletConfig对象。 作用ServletConfig对象是Servlet的专属配置对象，每个Servlet都单独拥有一个ServletConfig对象，用来获取web.xml中的配置信息。 使用获取ServletConfig对象： 1ServletConfig config = this.getServletConfig(); 获取web.xml中Servlet的配置信息： 1config.getInitParameter(String name); 在web.xml中配置数据的方式： 12345678&lt;servlet&gt; &lt;servlet-name&gt;ServletConfigServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;cn.text.servlet.ServletConfigServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;config&lt;/param-name&gt; &lt;param-value&gt;utf-8&lt;/param-value&gt; &lt;/init-param&gt;&lt;/servlet&gt;]]></content>
+    <content type="text"><![CDATA[ServletContext对象问题Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？ 解决ServletContext对象。 每次写“解决”这一项的时候总感觉自己在说废话…… 作用解决不同用户间的数据共享问题。 原理ServletContext对象由服务器进行创建，一个项目只有一个ServletContext对象。不管在项目的任意位置进行获取得到的都是同一个ServletContext对象，那么不同用户发起的请求获取到的也就是同一个对象了，该对象由所有用户共同拥有。 特点由服务器创建； 用户共享； 一个项目只有一个。 生命周期服务器启动到服务器关闭 作用域整个项目内 使用获取ServletContext对象： 123456// 第一种（常用）ServletContext context = this.getServletContext();// 第二种（特殊情况下使用）ServletContext context = this.getServletConfig.getServletContext();// 第三种（常用）ServletContext context = request.getSession().getServletContext(); 使用ServletContext对象完成数据共享： 1234// 数据存储context.setAttribute(String name, Object value);// 数据获取context.getAttribute(String name); 注意：不同的用户可以给ServletContext对象进行数据存取。 获取项目中web.xml文件中的全局配置数据： 12345// 根据键的名字返回web.xml中适配的全局数据的值，返回String类型。如果不存在则返回null。context.getInitParameter(String name);// 返回键名的枚举context.getInitParameterNames(); web.xml中配置全局数据的方式（适用于所有XML）： 1234&lt;context-param&gt; &lt;param-name&gt;name&lt;/param-name&gt; &lt;param-value&gt;Edward&lt;/param-value&gt;&lt;/context-param&gt; 注意：一组&lt;context-param&gt;标签只能存储一组键值对数据，多组可以声明多个&lt;context-param&gt;进行存储。 作用：将静态数据和代码进行解耦。 获取项目WebRoot下的资源的绝对路径： 12// 获取的路径为项目根路径，path参数为项目根目录下的路径。String path = context.getRealPath(String path); 获取WebRoot下的资源的流对象： 1InputStream is = context.getResourceAsStream(String path); 注意：此种方式只能获取项目根目录下的资源流对象，class文件的流对象需要使用类加载器获取。 path参数为项目根目录下的路径。 ServletConfig对象问题在使用ServletContext对象获取web.xml中的全局配置文件，在web.xml中，每个Servlet也可以进行单独的配置，那么该怎么获取配置信息？ 解决使用ServletConfig对象。 作用ServletConfig对象是Servlet的专属配置对象，每个Servlet都单独拥有一个ServletConfig对象，用来获取web.xml中的配置信息。 使用获取ServletConfig对象： 1ServletConfig config = this.getServletConfig(); 获取web.xml中Servlet的配置信息： 1config.getInitParameter(String name); 在web.xml中配置数据的方式： 12345678&lt;servlet&gt; &lt;servlet-name&gt;ServletConfigServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;cn.text.servlet.ServletConfigServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;config&lt;/param-name&gt; &lt;param-value&gt;utf-8&lt;/param-value&gt; &lt;/init-param&gt;&lt;/servlet&gt; 小结Request：解决了一次请求内的数据共享问题。 Response：一个用来将数据响应到浏览器的对象。 Cookie：解决了发送的不同请求之间的数据共享问题。浏览器端存储技术。 Session：解决了一个用户的不同请求的数据共享问题。服务器端存储技术。依赖于Cookie。]]></content>
       <categories>
         <category>JavaWeb</category>
       </categories>

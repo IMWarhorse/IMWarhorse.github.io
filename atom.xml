@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://imwarhorse.github.io/"/>
-  <updated>2019-07-19T08:50:18.357Z</updated>
+  <updated>2019-07-19T11:23:34.268Z</updated>
   <id>https://imwarhorse.github.io/</id>
   
   <author>
@@ -17,13 +17,187 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JavaWeb08-web.xml与server.xml</title>
+    <link href="https://imwarhorse.github.io/2019/07/20/JavaWeb08-web-xml%E4%B8%8Eserver-xml/"/>
+    <id>https://imwarhorse.github.io/2019/07/20/JavaWeb08-web-xml与server-xml/</id>
+    <published>2019-07-20T06:07:54.000Z</published>
+    <updated>2019-07-19T11:23:34.268Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>存储项目相关的配置信息，保护Servlet。解耦一些数据和对程序的依赖。</p><h3 id="使用位置"><a href="#使用位置" class="headerlink" title="使用位置"></a>使用位置</h3><p>每个Web项目中。</p><p>Tomcat服务器中（在服务器目录conf目录中）。</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Web项目下的web.xml文件为局部配置，针对本项目的配置。</p><p>Tomcat下的web.xml文件为全局配置，配置作用域服务器下的所有Web项目，但是，优先级小于局部配置。</p><h3 id="内容（核心组件）"><a href="#内容（核心组件）" class="headerlink" title="内容（核心组件）"></a>内容（核心组件）</h3><ol><li>全局上下文配置（全局配置参数）；</li><li>Servlet配置；</li><li>过滤器配置；</li><li>监听器配置。</li></ol><h3 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h3><p>Web容器会按ServletContext –&gt; context-param –&gt; listener –&gt; filter –&gt; servlet这个顺序加载组件，这些元素可配置在web.xml中。</p><h3 id="加载时机"><a href="#加载时机" class="headerlink" title="加载时机"></a>加载时机</h3><p>服务器启动时。</p><h2 id="server-xml"><a href="#server-xml" class="headerlink" title="server.xml"></a>server.xml</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>浏览器发起请求后，服务器根据请求在webapps目录下调用对应的Servlet进行请求处理。那么为什么是webapps目录暗道不能是其他的目录吗？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>了解server.xml文件的配置信息。</p><h3 id="内容-核心组件"><a href="#内容-核心组件" class="headerlink" title="内容(核心组件)"></a>内容(核心组件)</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Context</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h3><p>把下面这段配置复制到server.xml的&lt;Host&gt;组件中就能实现热部署：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">"/项目别名"</span> <span class="attr">reloadable</span>=<span class="string">"false"</span> <span class="attr">docBase</span>=<span class="string">"需要进行热部署的项目的绝对路径，路径要到WebRoot"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>如果把reloadable更改为true，则每次Servlet发生改变，项目都会重新加载到内存。</p><blockquote><p>   注意：如果进行了热部署的项目要删除，一定要把在server.xml文件中配置的热部署&lt;Context&gt;删除，否则Tomcat在启动时会报错。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;web-xml&quot;&gt;&lt;a href=&quot;#web-xml&quot; class=&quot;headerlink&quot; title=&quot;web.xml&quot;&gt;&lt;/a&gt;web.xml&lt;/h2&gt;&lt;h3 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb13-JSP的九大内置对象及四个作用域对象</title>
+    <link href="https://imwarhorse.github.io/2019/02/22/JavaWeb13-JSP%E7%9A%84%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%9B%9B%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://imwarhorse.github.io/2019/02/22/JavaWeb13-JSP的九大内置对象及四个作用域对象/</id>
+    <published>2019-02-22T00:56:58.000Z</published>
+    <updated>2019-07-19T13:16:54.259Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="九大内置对象"><a href="#九大内置对象" class="headerlink" title="九大内置对象"></a>九大内置对象</h1><h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><p>JSP文件在转译成其对应的Servlet文件的时候自动生成并声明的对象。我们在JSP页面中直接使用即可。</p><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>内置对象在JSP页面中使用，只能在局部代码块或者脚本段语句中使用，不能在全局代码块中使用。<br>    因为JSP文件转译后所有的代码都在转译后的Servlet的service()方法下，而九大内置对象都声明在service()方法中，全局代码块无法访问。</p><h2 id="pageContext对象"><a href="#pageContext对象" class="headerlink" title="pageContext对象"></a>pageContext对象</h2><blockquote><p>   页面上下文对象，封存了其他内置对象。封存了当前jsp的运行信息。</p></blockquote><h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>每个JSP文件单独拥有一个pageContext对象。</p><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>当前页面。</p><h2 id="request对象"><a href="#request对象" class="headerlink" title="request对象"></a>request对象</h2><blockquote><p>  封存当前请求信息数据的对象。由Tomcat服务器创建。</p></blockquote><h3 id="作用域-1"><a href="#作用域-1" class="headerlink" title="作用域"></a>作用域</h3><p>一次请求中。</p><h2 id="Session对象"><a href="#Session对象" class="headerlink" title="Session对象"></a>Session对象</h2><blockquote><p>  此对象是用来存储用户的不同请求的共享数据的。</p></blockquote><h3 id="作用域-2"><a href="#作用域-2" class="headerlink" title="作用域"></a>作用域</h3><p>一次会话中。</p><h2 id="application"><a href="#application" class="headerlink" title="application"></a>application</h2><blockquote><p>  此对象用来存储用户的不同请求的共享数据的。一个项目只有一个，存储所有用户共享数据的对象，以及完成其他操作（比如获取文件的绝对路径）。</p></blockquote><h3 id="作用域-3"><a href="#作用域-3" class="headerlink" title="作用域"></a>作用域</h3><p>整个项目内。</p><h2 id="response对象"><a href="#response对象" class="headerlink" title="response对象"></a>response对象</h2><blockquote><p>  用来响应请求处理结果给浏览器的对象。设置响应头，重定向。</p></blockquote><h2 id="out对象"><a href="#out对象" class="headerlink" title="out对象"></a>out对象</h2><blockquote><p>  响应对象，JSP内部使用，带有缓冲区的响应对象，效率高于response对象。</p></blockquote><h2 id="page对象"><a href="#page对象" class="headerlink" title="page对象"></a>page对象</h2><blockquote><p>  代表当前JSP的对象。相当于Java中的this。</p></blockquote><h2 id="exception对象"><a href="#exception对象" class="headerlink" title="exception对象"></a>exception对象</h2><blockquote><p>  异常对象，存储了当前运行的异常信息。</p><p>  注意：使用此对象需要在page指令中使用属性isErrorPage=”true”开启。</p></blockquote><h2 id="config对象"><a href="#config对象" class="headerlink" title="config对象"></a>config对象</h2><blockquote><p>  也就是ServletConfig，只要是用来获取web.xml中的配置数据，完成一些初始化数据的读取。</p></blockquote><h2 id="四个作用域"><a href="#四个作用域" class="headerlink" title="四个作用域"></a>四个作用域</h2><h3 id="pageContext作用域"><a href="#pageContext作用域" class="headerlink" title="pageContext作用域"></a>pageContext作用域</h3><blockquote><p>  当前页面。解决了当前页面内的数据共享问题。获取其他内置对象。</p></blockquote><h3 id="request作用域"><a href="#request作用域" class="headerlink" title="request作用域"></a>request作用域</h3><blockquote><p>  一次请求。一个请求的Servlet的数据共享。通过请求转发将数据流转给下一个Servlet。</p></blockquote><h3 id="session作用域"><a href="#session作用域" class="headerlink" title="session作用域"></a>session作用域</h3><blockquote><p>  一次会话。一个用户的不同请求的数据共享。将数据从一次请求流转给其他请求。</p></blockquote><h3 id="application作用域"><a href="#application作用域" class="headerlink" title="application作用域"></a>application作用域</h3><blockquote><p>  项目内。不同用户的数据共享问题。将数据从一个用户的数据流转给其他用户。</p></blockquote><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>数据流转。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;九大内置对象&quot;&gt;&lt;a href=&quot;#九大内置对象&quot; class=&quot;headerlink&quot; title=&quot;九大内置对象&quot;&gt;&lt;/a&gt;九大内置对象&lt;/h1&gt;&lt;h3 id=&quot;内置对象&quot;&gt;&lt;a href=&quot;#内置对象&quot; class=&quot;headerlink&quot; title=&quot;内
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb12-JSP的静/动态引入及forward转发标签</title>
+    <link href="https://imwarhorse.github.io/2019/02/21/JavaWeb12-JSP%E7%9A%84%E9%9D%99-%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%E5%8F%8Aforward%E8%BD%AC%E5%8F%91%E6%A0%87%E7%AD%BE/"/>
+    <id>https://imwarhorse.github.io/2019/02/21/JavaWeb12-JSP的静-动态引入及forward转发标签/</id>
+    <published>2019-02-21T14:16:50.000Z</published>
+    <updated>2019-07-19T12:56:22.516Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="静态引入"><a href="#静态引入" class="headerlink" title="静态引入"></a>静态引入</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"要引入的jsp文件的相对路径"</span> %&gt;</span><br></pre></td></tr></table></figure><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol><li>会将引入的jsp文件和当前jsp文件转译成一个Java（Servlet）文件使用；</li><li>在网页中也就显示处了合并后的显示效果。</li></ol><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>静态引入的jsp文件不会单独转译成Java（Servlet）文件。</p><p>当前文件和静态引入的jsp文件不能够使用Java代码声明同名变量。</p><h2 id="动态引入"><a href="#动态引入" class="headerlink" title="动态引入"></a>动态引入</h2><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:include page="要引入的jsp文件的相对路径"&gt;&lt;/jsp:include&gt;</span><br></pre></td></tr></table></figure><h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ol><li>会将引入的jsp文件单独编译，在当前文件编译好的Java文件中调用引入的jsp文件的编译文件。</li><li>在网页中显示合并后的显示效果。</li></ol><h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>动态引入允许文件中声明同名变量。</p><blockquote><p>  静态引入和动态引入的优点：降低jsp代码的冗余，便于维护升级。</p></blockquote><h2 id="forward转发标签"><a href="#forward转发标签" class="headerlink" title="forward转发标签"></a>forward转发标签</h2><h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page="要转发的jsp文件的相对路径"&gt;&lt;/jsp:forward&gt;</span><br></pre></td></tr></table></figure><h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ol><li>一次请求；</li><li>地址栏信息不改变。</li></ol><h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><p>在转发标签的闭合标签中间除了写&lt;jsp:param value=”” name=”” /&gt;不会报错，其他的任意字符都会报错，包括空格。<br>    name属性为附带的数据的键名。<br>    value为附带的数据内容。</p><p>转发时会将数据以<code>?</code>的形式拼接在转发路径的后面。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;静态引入&quot;&gt;&lt;a href=&quot;#静态引入&quot; class=&quot;headerlink&quot; title=&quot;静态引入&quot;&gt;&lt;/a&gt;静态引入&lt;/h2&gt;&lt;h3 id=&quot;使用&quot;&gt;&lt;a href=&quot;#使用&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb11-JSP之代码块</title>
+    <link href="https://imwarhorse.github.io/2019/02/21/JavaWeb11-JSP%E4%B9%8B%E4%BB%A3%E7%A0%81%E5%9D%97/"/>
+    <id>https://imwarhorse.github.io/2019/02/21/JavaWeb11-JSP之代码块/</id>
+    <published>2019-02-21T13:31:33.000Z</published>
+    <updated>2019-07-19T12:40:51.448Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="局部代码块"><a href="#局部代码块" class="headerlink" title="局部代码块"></a>局部代码块</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>局部代码块中声明的Java代码会被原样转译到jsp对应的Servlet文件的<code>_JspService()</code>方法中。</p><p>代码块中声明的变量都是局部变量。</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% Java代码 %&gt;</span><br></pre></td></tr></table></figure><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>使用局部代码块在jsp中进行逻辑判断，书写麻烦，阅读困难。</p><h3 id="使用时机"><a href="#使用时机" class="headerlink" title="使用时机"></a>使用时机</h3><p>尽量少在jsp中加入逻辑代码。</p><p>开发中，Servler进行请求逻辑处理，使用jsp进行页面展现。</p><h2 id="全局代码块"><a href="#全局代码块" class="headerlink" title="全局代码块"></a>全局代码块</h2><h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><p>声明的Java代码作为全局代码转译到对应的Servlet类中。</p><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%! 全局代码 %&gt;</span><br></pre></td></tr></table></figure><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>全局代码块声明的代码，需要使用局部代码块调用。</p><h2 id="脚本段语句"><a href="#脚本段语句" class="headerlink" title="脚本段语句"></a>脚本段语句</h2><h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><p>帮助我们快速的获取变量和方法的返回值响应给浏览器。</p><h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= 变量名或方法 %&gt;</span><br></pre></td></tr></table></figure><h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>不要再变量名或方法后使用分号。</p><h3 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h3><p>除了JSP语法要求以外的任何位置都可以写。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;局部代码块&quot;&gt;&lt;a href=&quot;#局部代码块&quot; class=&quot;headerlink&quot; title=&quot;局部代码块&quot;&gt;&lt;/a&gt;局部代码块&lt;/h2&gt;&lt;h3 id=&quot;特点&quot;&gt;&lt;a href=&quot;#特点&quot; class=&quot;headerlink&quot; title=&quot;特点&quot;&gt;&lt;/a&gt;特
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb10-JSP之page指令</title>
+    <link href="https://imwarhorse.github.io/2019/02/21/JavaWeb10-JSP%E4%B9%8Bpage%E6%8C%87%E4%BB%A4/"/>
+    <id>https://imwarhorse.github.io/2019/02/21/JavaWeb10-JSP之page指令/</id>
+    <published>2019-02-21T12:49:22.000Z</published>
+    <updated>2019-07-19T12:32:49.844Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="JSP的注释"><a href="#JSP的注释" class="headerlink" title="JSP的注释"></a>JSP的注释</h2><h3 id="前端语言注释"><a href="#前端语言注释" class="headerlink" title="前端语言注释"></a>前端语言注释</h3><p>会被转译，也会被发送，但是不会被浏览器执行。</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  --&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Java语言注释"><a href="#Java语言注释" class="headerlink" title="Java语言注释"></a>Java语言注释</h3><p>会被转译，但是不会被Servlet执行。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">/**/</span></span><br><span class="line"><span class="comment">/***/</span></span><br></pre></td></tr></table></figure><h3 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h3><p>不会被转译。</p><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--  --%&gt;</span><br></pre></td></tr></table></figure><h2 id="page指令"><a href="#page指令" class="headerlink" title="page指令"></a>page指令</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% page 属性名=<span class="string">"属性值"</span> 属性名=<span class="string">"属性值"</span>...%&gt;</span><br></pre></td></tr></table></figure><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul><li>language：声明JSP被转译的语言。通常是值为java。</li><li>import：声明转译的java文件要导入的包，不同的包使用英文逗号隔开。</li><li>pageEncoding：设置JSP文件的数据编码格式。</li><li>contentType：设置JSP数据响应给浏览器时，浏览器的解析和编码格式。举例：”text/html;charset=utf-8”。</li><li>session：设置转译的Servlet中是否开启Session支持，默认开启。true表示开启，false表示关闭。</li><li>errorPage：设置JSP运行错误后跳转的页面。</li><li>extends：设置JSP转译的Java文件要继承的父类。</li></ul><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>page指令的作用就是配置jsp文件的转译相关的参数。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;JSP的注释&quot;&gt;&lt;a href=&quot;#JSP的注释&quot; class=&quot;headerlink&quot; title=&quot;JSP的注释&quot;&gt;&lt;/a&gt;JSP的注释&lt;/h2&gt;&lt;h3 id=&quot;前端语言注释&quot;&gt;&lt;a href=&quot;#前端语言注释&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaWeb09-JSP的概念和运行原理</title>
+    <link href="https://imwarhorse.github.io/2019/02/21/JavaWeb09-JSP%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86/"/>
+    <id>https://imwarhorse.github.io/2019/02/21/JavaWeb09-JSP的概念和运行原理/</id>
+    <published>2019-02-21T12:02:51.000Z</published>
+    <updated>2019-07-19T12:15:53.183Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在学了Servlet之后，使用Servlet进行页面的展现，代码书写过于麻烦。极大的影响了开发的效率，那么有没有一种方式可以让我们像以前写网页一样来进行网页的编程工作呢？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>使用JSP技术。</p><h3 id="概念（了解）"><a href="#概念（了解）" class="headerlink" title="概念（了解）"></a>概念（了解）</h3><p>JSP全名为Java Server Page，中文名叫Java服务器页面，其根本是一个简化的Servlet设计，它是由Sun Microsystems公司提倡、许多公司参与的一起建立的一种动态网页技术标准。</p><p>在保留Servlet的优点的同时，可以让我们像以前编写HTML一样流畅的编写网页信息。也就是说，用JSP来进行网页信息的响应的话，它里面可以进行业务逻辑判断（不可取）。</p><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul><li>本质上还是Servlet（内部由JspServlet将JSP转义为Servlet）；</li><li>跨平台，一次编写到处运行；</li><li>组件跨平台；</li><li>健壮性和安全性。</li></ul><h3 id="JSP的访问原理"><a href="#JSP的访问原理" class="headerlink" title="JSP的访问原理"></a>JSP的访问原理</h3><p>浏览器发起请求，请求JSP，请求被Tomcat服务器接收，执行JspServlet，将请求的JSP文件转义成为对应的Java文件（也是Servlet），然后执行转义好的Java文件。</p><h3 id="JSP的语法和指令"><a href="#JSP的语法和指令" class="headerlink" title="JSP的语法和指令"></a>JSP的语法和指令</h3><ul><li>JSP的page指令</li><li>JSP的taglib指令</li><li>JSP的局部代码块</li><li>JSP的全局代码块</li><li>JSP的脚本段</li><li>JSP的注释</li><li>JSP的静态引入（JSP的include指令）</li><li>JSP的动态引入</li><li>页面转发（forward标签）</li></ul><h3 id="JSP的内置对象"><a href="#JSP的内置对象" class="headerlink" title="JSP的内置对象"></a>JSP的内置对象</h3><ul><li>PageContext对象</li><li>Request对象</li><li>Session对象</li><li>Application对象</li><li>Response对象</li><li>Out对象</li><li>Page对象</li><li>Exception对象</li></ul><blockquote><p>  是否为动态网页的衡量标准：页面内数据数据是否会动态的更改。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;在学了Servlet之后，使用Servlet进行页面的展现，代码书写过于麻烦。极大的影响了开发的效率，那么有没有一种方式可以让我们像以前写网
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="https://imwarhorse.github.io/categories/JavaWeb/"/>
+    
+    
+      <category term="Java" scheme="https://imwarhorse.github.io/tags/Java/"/>
+    
+      <category term="Servlet" scheme="https://imwarhorse.github.io/tags/Servlet/"/>
+    
+      <category term="Web" scheme="https://imwarhorse.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaWeb07-ServletContext及ServletConfig对象</title>
     <link href="https://imwarhorse.github.io/2019/02/20/JavaWeb07-ServletContext%E5%8F%8AServletConfig%E5%AF%B9%E8%B1%A1/"/>
     <id>https://imwarhorse.github.io/2019/02/20/JavaWeb07-ServletContext及ServletConfig对象/</id>
     <published>2019-02-20T02:24:00.000Z</published>
-    <updated>2019-07-19T08:50:18.357Z</updated>
+    <updated>2019-07-19T11:25:26.519Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>ServletContext对象。</p><blockquote><p>  每次写“解决”这一项的时候总感觉自己在说废话……</p></blockquote><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>解决不同用户间的数据共享问题。</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>ServletContext对象由服务器进行创建，一个项目只有一个ServletContext对象。不管在项目的任意位置进行获取得到的都是同一个ServletContext对象，那么不同用户发起的请求获取到的也就是同一个对象了，该对象由所有用户共同拥有。</p><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>由服务器创建；</p><p>用户共享；</p><p>一个项目只有一个。</p><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>服务器启动到服务器关闭</p><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>整个项目内</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>获取ServletContext对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种（常用）</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line"><span class="comment">// 第二种（特殊情况下使用）</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletConfig.getServletContext();</span><br><span class="line"><span class="comment">// 第三种（常用）</span></span><br><span class="line">ServletContext context = request.getSession().getServletContext();</span><br></pre></td></tr></table></figure><p>使用ServletContext对象完成数据共享：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据存储</span></span><br><span class="line">context.setAttribute(String name, Object value);</span><br><span class="line"><span class="comment">// 数据获取</span></span><br><span class="line">context.getAttribute(String name);</span><br></pre></td></tr></table></figure><blockquote><p>   注意：不同的用户可以给ServletContext对象进行数据存取。</p></blockquote><p>获取项目中web.xml文件中的全局配置数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 根据键的名字返回web.xml中适配的全局数据的值，返回String类型。如果不存在则返回null。</span><br><span class="line">context.getInitParameter(String name);</span><br><span class="line"></span><br><span class="line">// 返回键名的枚举</span><br><span class="line">context.getInitParameterNames();</span><br></pre></td></tr></table></figure><p>web.xml中配置全局数据的方式（适用于所有XML）：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Edward<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure><blockquote><p>  注意：一组&lt;context-param&gt;标签只能存储一组键值对数据，多组可以声明多个&lt;context-param&gt;进行存储。</p></blockquote><p>作用：将静态数据和代码进行解耦。</p><p>获取项目WebRoot下的资源的绝对路径：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取的路径为项目根路径，path参数为项目根目录下的路径。</span></span><br><span class="line">String path = context.getRealPath(String path);</span><br></pre></td></tr></table></figure><p>获取WebRoot下的资源的流对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream is = context.getResourceAsStream(String path);</span><br></pre></td></tr></table></figure><blockquote><p>   注意：此种方式只能获取项目根目录下的资源流对象，class文件的流对象需要使用类加载器获取。</p><p>  path参数为项目根目录下的路径。</p></blockquote><h2 id="ServletConfig对象"><a href="#ServletConfig对象" class="headerlink" title="ServletConfig对象"></a>ServletConfig对象</h2><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>在使用ServletContext对象获取web.xml中的全局配置文件，在web.xml中，每个Servlet也可以进行单独的配置，那么该怎么获取配置信息？</p><h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><p>使用ServletConfig对象。</p><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>ServletConfig对象是Servlet的专属配置对象，每个Servlet都单独拥有一个ServletConfig对象，用来获取web.xml中的配置信息。</p><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>获取ServletConfig对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServletConfig config = <span class="keyword">this</span>.getServletConfig();</span><br></pre></td></tr></table></figure><p>获取web.xml中Servlet的配置信息：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.getInitParameter(String name);</span><br></pre></td></tr></table></figure><p>在web.xml中配置数据的方式：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.text.servlet.ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-name</span>&gt;</span>config<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>ServletContext对象。</p><blockquote><p>  每次写“解决”这一项的时候总感觉自己在说废话……</p></blockquote><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>解决不同用户间的数据共享问题。</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>ServletContext对象由服务器进行创建，一个项目只有一个ServletContext对象。不管在项目的任意位置进行获取得到的都是同一个ServletContext对象，那么不同用户发起的请求获取到的也就是同一个对象了，该对象由所有用户共同拥有。</p><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>由服务器创建；</p><p>用户共享；</p><p>一个项目只有一个。</p><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>服务器启动到服务器关闭</p><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>整个项目内</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>获取ServletContext对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种（常用）</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line"><span class="comment">// 第二种（特殊情况下使用）</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletConfig.getServletContext();</span><br><span class="line"><span class="comment">// 第三种（常用）</span></span><br><span class="line">ServletContext context = request.getSession().getServletContext();</span><br></pre></td></tr></table></figure><p>使用ServletContext对象完成数据共享：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据存储</span></span><br><span class="line">context.setAttribute(String name, Object value);</span><br><span class="line"><span class="comment">// 数据获取</span></span><br><span class="line">context.getAttribute(String name);</span><br></pre></td></tr></table></figure><blockquote><p>   注意：不同的用户可以给ServletContext对象进行数据存取。</p></blockquote><p>获取项目中web.xml文件中的全局配置数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 根据键的名字返回web.xml中适配的全局数据的值，返回String类型。如果不存在则返回null。</span><br><span class="line">context.getInitParameter(String name);</span><br><span class="line"></span><br><span class="line">// 返回键名的枚举</span><br><span class="line">context.getInitParameterNames();</span><br></pre></td></tr></table></figure><p>web.xml中配置全局数据的方式（适用于所有XML）：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Edward<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure><blockquote><p>  注意：一组&lt;context-param&gt;标签只能存储一组键值对数据，多组可以声明多个&lt;context-param&gt;进行存储。</p></blockquote><p>作用：将静态数据和代码进行解耦。</p><p>获取项目WebRoot下的资源的绝对路径：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取的路径为项目根路径，path参数为项目根目录下的路径。</span></span><br><span class="line">String path = context.getRealPath(String path);</span><br></pre></td></tr></table></figure><p>获取WebRoot下的资源的流对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream is = context.getResourceAsStream(String path);</span><br></pre></td></tr></table></figure><blockquote><p>   注意：此种方式只能获取项目根目录下的资源流对象，class文件的流对象需要使用类加载器获取。</p><p>  path参数为项目根目录下的路径。</p></blockquote><h2 id="ServletConfig对象"><a href="#ServletConfig对象" class="headerlink" title="ServletConfig对象"></a>ServletConfig对象</h2><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>在使用ServletContext对象获取web.xml中的全局配置文件，在web.xml中，每个Servlet也可以进行单独的配置，那么该怎么获取配置信息？</p><h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><p>使用ServletConfig对象。</p><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>ServletConfig对象是Servlet的专属配置对象，每个Servlet都单独拥有一个ServletConfig对象，用来获取web.xml中的配置信息。</p><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>获取ServletConfig对象：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServletConfig config = <span class="keyword">this</span>.getServletConfig();</span><br></pre></td></tr></table></figure><p>获取web.xml中Servlet的配置信息：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.getInitParameter(String name);</span><br></pre></td></tr></table></figure><p>在web.xml中配置数据的方式：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.text.servlet.ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-name</span>&gt;</span>config<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Request：解决了一次请求内的数据共享问题。</p><p>Response：一个用来将数据响应到浏览器的对象。</p><p>Cookie：解决了发送的不同请求之间的数据共享问题。浏览器端存储技术。</p><p>Session：解决了一个用户的不同请求的数据共享问题。服务器端存储技术。依赖于Cookie。</p>]]></content>
     
     <summary type="html">
     

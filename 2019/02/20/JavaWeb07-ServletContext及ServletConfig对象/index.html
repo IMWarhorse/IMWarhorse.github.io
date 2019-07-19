@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="War horse&#39;s blog">
 <meta property="og:description" content="ServletContext对象问题Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？ 解决ServletContext对象。    每次写“解决”这一项的时候总感觉自己在说废话……  作用解决不同用户间的数据共享问题。 原理ServletContext对象由服务器进行创建，一个项目只有一个ServletContext">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T08:50:18.357Z">
+<meta property="og:updated_time" content="2019-07-19T11:25:26.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaWeb07-ServletContext及ServletConfig对象">
 <meta name="twitter:description" content="ServletContext对象问题Request解决了一次请求内的数据共享问题，Session解决了用户不同请求间的数据共享问题，那么不同数据的数据共享该怎么办呢？ 解决ServletContext对象。    每次写“解决”这一项的时候总感觉自己在说废话……  作用解决不同用户间的数据共享问题。 原理ServletContext对象由服务器进行创建，一个项目只有一个ServletContext">
@@ -483,6 +483,10 @@
 <p>在web.xml中配置数据的方式：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.text.servlet.ServletConfigServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>config<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Request：解决了一次请求内的数据共享问题。</p>
+<p>Response：一个用来将数据响应到浏览器的对象。</p>
+<p>Cookie：解决了发送的不同请求之间的数据共享问题。浏览器端存储技术。</p>
+<p>Session：解决了一个用户的不同请求的数据共享问题。服务器端存储技术。依赖于Cookie。</p>
 
       
     </div>
@@ -526,6 +530,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/21/JavaWeb09-JSP的概念和运行原理/" rel="prev" title="JavaWeb09-JSP的概念和运行原理">
+                JavaWeb09-JSP的概念和运行原理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -604,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -696,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletContext对象"><span class="nav-number">1.</span> <span class="nav-text">ServletContext对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.3.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.4.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.5.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">1.6.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">1.7.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.8.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletConfig对象"><span class="nav-number">2.</span> <span class="nav-text">ServletConfig对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用-1"><span class="nav-number">2.3.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">2.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletContext对象"><span class="nav-number">1.</span> <span class="nav-text">ServletContext对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.3.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.4.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.5.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">1.6.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">1.7.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.8.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletConfig对象"><span class="nav-number">2.</span> <span class="nav-text">ServletConfig对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用-1"><span class="nav-number">2.3.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">2.4.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
