@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Java,框架,Spring,">
 
 
 
@@ -125,17 +125,18 @@
 
 
 
-<meta name="description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
-<meta name="keywords" content="Java,Framework,MySQL,Spring,Spring MVC,MyBatis">
-<meta property="og:type" content="website">
-<meta property="og:title" content="War horse&#39;s blog">
-<meta property="og:url" content="https://imwarhorse.github.io/categories/JavaWeb/index.html">
+<meta name="description" content="前言    每个新产品或新技术的出现都是为了解决现有的问题或痛点   而框架伴随它们的问世的同时也承载着“神圣的使命”。  回想在还没有接触框架的时候，代码是怎么写的。不停的newnewnew…，整个程序的多个分层之间，依赖性很强，A层用到了B层的类，B层用到了C层的类，C层用了B层的类……这是框架解决的痛点之一——高耦合，不易扩展。 基于上一条，各层级之间有千丝万缕的关联，而此时，项目需求变更，">
+<meta name="keywords" content="Java,框架,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[玩好Spring]初识Spring">
+<meta property="og:url" content="https://imwarhorse.github.io/2019/03/02/玩好Spring-初识Spring/index.html">
 <meta property="og:site_name" content="War horse&#39;s blog">
-<meta property="og:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta property="og:description" content="前言    每个新产品或新技术的出现都是为了解决现有的问题或痛点   而框架伴随它们的问世的同时也承载着“神圣的使命”。  回想在还没有接触框架的时候，代码是怎么写的。不停的newnewnew…，整个程序的多个分层之间，依赖性很强，A层用到了B层的类，B层用到了C层的类，C层用了B层的类……这是框架解决的痛点之一——高耦合，不易扩展。 基于上一条，各层级之间有千丝万缕的关联，而此时，项目需求变更，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-20T07:56:48.197Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="War horse&#39;s blog">
-<meta name="twitter:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta name="twitter:title" content="[玩好Spring]初识Spring">
+<meta name="twitter:description" content="前言    每个新产品或新技术的出现都是为了解决现有的问题或痛点   而框架伴随它们的问世的同时也承载着“神圣的使命”。  回想在还没有接触框架的时候，代码是怎么写的。不停的newnewnew…，整个程序的多个分层之间，依赖性很强，A层用到了B层的类，B层用到了C层的类，C层用了B层的类……这是框架解决的痛点之一——高耦合，不易扩展。 基于上一条，各层级之间有千丝万缕的关联，而此时，项目需求变更，">
 
 
 
@@ -165,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://imwarhorse.github.io/categories/JavaWeb/">
+  <link rel="canonical" href="https://imwarhorse.github.io/2019/03/02/玩好Spring-初识Spring/">
 
 
 
 
 
-  <title>分类: JavaWeb | War horse's blog</title>
+  <title>[玩好Spring]初识Spring | War horse's blog</title>
   
 
 
@@ -190,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -326,291 +327,198 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JavaWeb<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://imwarhorse.github.io/2019/03/02/玩好Spring-初识Spring/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="War horse">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="War horse's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/02/22/JavaWeb13-JSP的九大内置对象及四个作用域对象/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb13-JSP的九大内置对象及四个作用域对象</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">[玩好Spring]初识Spring</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-22T08:56:58+08:00" content="2019-02-22">
-          02-22
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-02T15:02:08+08:00">
+                2019-03-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/玩好Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">玩好Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/21/JavaWeb12-JSP的静-动态引入及forward转发标签/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb12-JSP的静/动态引入及forward转发标签</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-21T22:16:50+08:00" content="2019-02-21">
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/21/JavaWeb11-JSP之代码块/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb11-JSP之代码块</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-21T21:31:33+08:00" content="2019-02-21">
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/21/JavaWeb10-JSP之page指令/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb10-JSP之page指令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-21T20:49:22+08:00" content="2019-02-21">
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/21/JavaWeb09-JSP的概念和运行原理/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb09-JSP的概念和运行原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-21T20:02:51+08:00" content="2019-02-21">
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/20/JavaWeb08-web-xml与server-xml/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb08-web.xml与server.xml</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-20T14:07:54+08:00" content="2019-02-20">
-          02-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/20/JavaWeb07-ServletContext及ServletConfig对象/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb07-ServletContext及ServletConfig对象</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-20T10:24:00+08:00" content="2019-02-20">
-          02-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/19/JavaWeb06-Session/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb06-Session</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-19T14:51:29+08:00" content="2019-01-19">
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/17/JavaWeb05-Cookie/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb05-Cookie</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-17T11:32:50+08:00" content="2019-01-17">
-          01-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/15/JavaWeb04-请求转发、重定向/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb04-请求转发、重定向</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-15T14:03:59+08:00" content="2019-01-15">
-          01-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>   每个新产品或新技术的出现都是为了解决现有的问题或痛点</p>
+<p>  而框架伴随它们的问世的同时也承载着“神圣的使命”。</p>
+</blockquote>
+<p>回想在还没有接触框架的时候，代码是怎么写的。不停的newnewnew…，整个程序的多个分层之间，依赖性很强，A层用到了B层的类，B层用到了C层的类，C层用了B层的类……这是框架解决的痛点之一——高耦合，不易扩展。</p>
+<p>基于上一条，各层级之间有千丝万缕的关联，而此时，项目需求变更，其中一层的某个或某些类中的代码需要发生变动，或者整个项目的架构需要发生变动，此时工作量是相当大的。这是框架解决的痛点之二——需求变更导致工作量指数性增加。</p>
+<p>重复造轮子是愚蠢的。这是框架解决的痛点之三——代码重用率高，重复造轮子难以专注于业务。</p>
+<h2 id="技术演变过程"><a href="#技术演变过程" class="headerlink" title="技术演变过程"></a>技术演变过程</h2><p>在2015年（或者说2014年）之前，企业级应用技术选型上Strust大行其道，但在2014年到2015年间，“轻量级”这个概念进入开发人员的视野中，Spring这样的轻量级框架也就自然而然的接管的“大好江山”，当然，促使开发人员放弃Struts这个“行动不便的老家伙”的最主要原因是那两年Struts频繁被曝出高危漏洞，导致开发人员和企业对它的信心逐渐消失，实在难顶…</p>
+<h2 id="Spring是什么"><a href="#Spring是什么" class="headerlink" title="Spring是什么"></a>Spring是什么</h2><p>Spring是一个轻量级的DI/IoC（控制反转）和AOP（面向切面）的容器框架。</p>
+<p>Spring的两大核心：第一个是DI也叫IoC，可以简单的认为就是一个东西，中文意思依赖注入/控制反转；第二个是AOP，即面向切面。</p>
+<p>参考资料：<br>[Spring Framework-Wiki][<a href="https://zh.wikipedia.org/wiki/Spring_Framework]" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/Spring_Framework]</a><br>[Spring框架-百度百科][<a href="https://baike.baidu.com/item/spring%E6%A1%86%E6%9E%B6/2853288]" target="_blank" rel="noopener">https://baike.baidu.com/item/spring%E6%A1%86%E6%9E%B6/2853288]</a></p>
+<h2 id="Spring的优点"><a href="#Spring的优点" class="headerlink" title="Spring的优点"></a>Spring的优点</h2><ol>
+<li>易于使用。内部隐藏了大部分复杂的实现，而且，如果难用那还用框架干嘛，闲得蛋疼…？</li>
+<li>使用Spring的IoC容器，将对象之间的依赖关系交给Spring，降低组件之间的耦合性，让我们更专注于业务逻辑；</li>
+<li>可以提供众多的服务，事务管理等；</li>
+<li>良好的AOP支持，方便面向切面编程；</li>
+<li>对主流的框架提供了很好的继承支持，比如Hibernate，Strusts2，JPA等（前两个现在来说不算主流了）；</li>
+<li>Spring DI机制降低了业务对象替换的替换的复杂性；</li>
+<li>对代码低侵入，代码污染极低；</li>
+<li>高度可开放性，并不强制依赖于Spring，开发者可以自由选择Spring</li>
+</ol>
+<p>部分或全部。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/22/JavaWeb13-JSP的九大内置对象及四个作用域对象/" rel="next" title="JavaWeb13-JSP的九大内置对象及四个作用域对象">
+                <i class="fa fa-chevron-left"></i> JavaWeb13-JSP的九大内置对象及四个作用域对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/玩好Spring-Spring的IoC原理/" rel="prev" title="[玩好Spring]Spring的IoC原理">
+                [玩好Spring]Spring的IoC原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/JavaWeb/page/2/">2</a><a class="extend next" rel="next" href="/categories/JavaWeb/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -618,6 +526,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -638,8 +550,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -738,6 +659,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术演变过程"><span class="nav-number">2.</span> <span class="nav-text">技术演变过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring是什么"><span class="nav-number">3.</span> <span class="nav-text">Spring是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring的优点"><span class="nav-number">4.</span> <span class="nav-text">Spring的优点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -878,6 +815,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
