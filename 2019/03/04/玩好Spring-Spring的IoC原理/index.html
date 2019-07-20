@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="War horse&#39;s blog">
 <meta property="og:description" content="IoC（Invesion of Control，控制反转）也称依赖注入（Dependency Injection），作为Spring的一个核心思想，是一种设计对象之间依赖关系的原则及其相关技术，作为Spring的一个关键技术，让我们好好了解一下。 IoC是什么？高内聚低耦合可以说是软件技术形态的终极目标。用学术界的话来说，软件的两个本质特征就是构造性和演化性，高内聚低耦合的设计能够让构造和演化都更">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T12:29:29.651Z">
+<meta property="og:updated_time" content="2019-07-20T12:31:19.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[玩好Spring]Spring的IoC原理">
 <meta name="twitter:description" content="IoC（Invesion of Control，控制反转）也称依赖注入（Dependency Injection），作为Spring的一个核心思想，是一种设计对象之间依赖关系的原则及其相关技术，作为Spring的一个关键技术，让我们好好了解一下。 IoC是什么？高内聚低耦合可以说是软件技术形态的终极目标。用学术界的话来说，软件的两个本质特征就是构造性和演化性，高内聚低耦合的设计能够让构造和演化都更">
@@ -484,8 +484,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">smartBossGoSomewhere</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	AbstractApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(App.class);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        SmartBoss boss = context.getBean(SmartBoss.class);</span><br><span class="line">        boss.goSomewhere();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="IoC的好处"><a href="#IoC的好处" class="headerlink" title="IoC的好处"></a>IoC的好处</h2><p>回到正题，通过上面的例子，我们来看看IoC到底带来了哪些好处？</p>
-<p><code>Boss</code>没有和某个具体的BookingService类耦合到一起了，这样Boss的维护和演化就更加方便。想象一下，如果Boss需要改用CtripBookingService，这时需要修改Boss.java的代码，更换接口的实现非常方便，给Boss注入新的实现即可，轻松惬意。（当然，要做到热插拔还需要进一步的工作，要么得玩转类加载器这玩意，或者借助OSGi这样的神器）。这也是典型的<strong>开放-封闭原则</strong>的例子。即对现有模块，功能扩展应该是开放的，而对其代码修改应该是封闭的，即能够做到不需要修改已有代码来扩展新的功能。</p>
-<p>想象一下，如果Boss自己直接去实例化QunarBookingService，而QunarBookingService在另外一个Package中甚至另一个Jar包中，你可得import进来才能使用，耦合度max！现在好了，Boss只依赖于抽象接口，测试更方便了，Mock一下就轻松搞定！Boss和QunarBookingService彼此不知道对方，Spring帮两者粘合在一起。</p>
+<p><code>Boss</code>没有和某个具体的<code>BookingService</code>类耦合到一起了，这样<code>Boss</code>的维护和演化就更加方便。想象一下，如果<code>Boss</code>需要改用<code>CtripBookingService</code>，这时需要修改<code>Boss.java</code>的代码，更换接口的实现非常方便，给<code>Boss</code>注入新的实现即可，轻松惬意。（当然，要做到热插拔还需要进一步的工作，要么得玩转类加载器这玩意，或者借助OSGi这样的神器）。这也是典型的<strong>开放-封闭原则</strong>的例子。即对现有模块，功能扩展应该是开放的，而对其代码修改应该是封闭的，即能够做到不需要修改已有代码来扩展新的功能。</p>
+<p>想象一下，如果<code>Boss</code>自己直接去实例化<code>QunarBookingService</code>，而<code>QunarBookingService</code>在另外一个Package中甚至另一个Jar包中，你可得<code>import</code>进来才能使用，耦合度MAX！现在好了，<code>Boss</code>只依赖于抽象接口，测试更方便了，Mock一下就轻松搞定！<code>Boss</code>和<code>QunarBookingService</code>彼此不知道对方，Spring帮两者粘合在一起。</p>
 <p>为什么IoC是个大招，因为它会自然而然得促进你应用一些好的设计原则，会帮助你开发出更加“高内聚低耦合”的应用。</p>
 <h2 id="IoC如何实现"><a href="#IoC如何实现" class="headerlink" title="IoC如何实现"></a>IoC如何实现</h2><p>最后我们简单说说IoC是如何实现的。想象一下，如果我们自己来实现这个依赖注入的功能，我们怎么来做？无外乎：</p>
 <ul>
