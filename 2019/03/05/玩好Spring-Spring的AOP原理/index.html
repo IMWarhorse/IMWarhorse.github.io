@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta name="description" content="AOP是什么？软件工程有一个具体原则叫做“关注点分离”（Concern Separation），通俗的理解就是不同的问题交给不同的部分去解决，每部分专注于解决自己的问题。各司其职。 这其实也是一种“分治”或者“分类”的思想，人解决复杂问题的能力是有限的，所以为了控制复杂性，我们解决问题时通常要对问题进行拆解，拆解的同时建立各部分之间的关系，各个击破之后整个问题也就迎刃而解了。人类的思考，复杂系统的">
 <meta name="keywords" content="Java,框架,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[玩好Spring]Spring的AOP原理">
 <meta property="og:url" content="https://imwarhorse.github.io/2019/03/05/玩好Spring-Spring的AOP原理/index.html">
 <meta property="og:site_name" content="War horse&#39;s blog">
-<meta property="og:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta property="og:description" content="AOP是什么？软件工程有一个具体原则叫做“关注点分离”（Concern Separation），通俗的理解就是不同的问题交给不同的部分去解决，每部分专注于解决自己的问题。各司其职。 这其实也是一种“分治”或者“分类”的思想，人解决复杂问题的能力是有限的，所以为了控制复杂性，我们解决问题时通常要对问题进行拆解，拆解的同时建立各部分之间的关系，各个击破之后整个问题也就迎刃而解了。人类的思考，复杂系统的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T13:24:01.537Z">
+<meta property="og:updated_time" content="2019-07-22T14:30:50.220Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[玩好Spring]Spring的AOP原理">
-<meta name="twitter:description" content="一个Ctrl C,V行为艺术家，Java码农的日常分享！">
+<meta name="twitter:description" content="AOP是什么？软件工程有一个具体原则叫做“关注点分离”（Concern Separation），通俗的理解就是不同的问题交给不同的部分去解决，每部分专注于解决自己的问题。各司其职。 这其实也是一种“分治”或者“分类”的思想，人解决复杂问题的能力是有限的，所以为了控制复杂性，我们解决问题时通常要对问题进行拆解，拆解的同时建立各部分之间的关系，各个击破之后整个问题也就迎刃而解了。人类的思考，复杂系统的">
 
 
 
@@ -432,7 +432,22 @@
       
 
       
-        
+        <h2 id="AOP是什么？"><a href="#AOP是什么？" class="headerlink" title="AOP是什么？"></a>AOP是什么？</h2><p>软件工程有一个具体原则叫做“关注点分离”（Concern Separation），通俗的理解就是不同的问题交给不同的部分去解决，每部分专注于解决自己的问题。各司其职。</p>
+<p>这其实也是一种“分治”或者“分类”的思想，人解决复杂问题的能力是有限的，所以为了控制复杂性，我们解决问题时通常要对问题进行拆解，拆解的同时建立各部分之间的关系，各个击破之后整个问题也就迎刃而解了。人类的思考，复杂系统的设计，计算机的算法，都能印证这一思想。……回到正题。</p>
+<p>面向切面编程（Aspect Oriented Programming，AOP）其实就是一种关注点分离技术，在软件工程领域一度是非常火的研究领域。我们软件开发时经常提一个词叫做“业务逻辑”或者“业务功能”，我们的代码主要就是实现某种特定的业务逻辑。但是我们往往不能专注于业务逻辑，比如我们写业务逻辑代码的同时，还要写事务管理、缓存、日志等等通用化的功能，而且每个业务功能都要和这些业务功能混在一起，非常难受非常痛苦！所以，为了将业务功能的关注点和通用功能的关注点分离开来，就出现了AOP技术。这些通用化功能的代码实现，对应的就是我们说的切面（Aspect）。</p>
+<p>业务功能代码和切面代码分开之后，责任明确，开发者就能各自专注解决问题了，代码可以优雅的组织了，设计更加高内聚低耦合了（终极目标）。但是请注意，代码分开的同时，我们如何保证功能的完整性呢？你的业务功能依然需要有事务和日志等特性，即切面最终需要合并（专业术语叫做<strong>织入</strong>，<strong>Weave</strong>）到业务功能中。怎么做到呢？这里就涉及到AOP的底层技术了，有三种方式：</p>
+<ol>
+<li>编译时织入：在代码编辑时，把切面代码融入进来，生成完整功能的Java字节码，这就需要特殊的Java编译器了，AspectJ属于这一类；</li>
+<li>类加载时织入：在Java字节码加载时，把切面的字节码融合进来，这就需要特殊的类加载器，AspectJ和AspectWerkz实现了类加载时织入；</li>
+<li>运行时织入：在运行时，通过动态代理的方法，调用切面代码增强业务功能，Spring采用的正是这种方式。动态代理会有性能上的开销，但是好处就是不需要什么特殊的编译器和类加载器做支持，按照写普通Java程序的方式来就可以。</li>
+</ol>
+<h2 id="一个场景"><a href="#一个场景" class="headerlink" title="一个场景"></a>一个场景</h2><p>说例子，上代码。照样用<a href="https://imwarhorse.github.io/2019/03/04/玩好Spring-Spring的IoC原理/">[玩好Spring]Spring的IoC原理</a>土豪老板订机票的例子。</p>
+<p><code>Boss</code>在订机票时，我们希望能够记录订机票这个操作所消耗的时间，同时记录日志（这里我们简单的在控制台打印预定成功的信息）。</p>
+<p>我们来看普通青年的做法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.imwarhorse.aopdemo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BookingService bookingService;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Boss</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bookingService = <span class="keyword">new</span> QunarBookingService();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">goSomewhere</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 订机票</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">boolean</span> status = bookingService.bookingFlight();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 查看耗时</span></span><br><span class="line">        <span class="keyword">long</span> duration = System.currentTimeMillis() - start;</span><br><span class="line">        System.out.println(String.formart(<span class="string">"time for booking flight is %d milliseconds"</span>, duration));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 记录日志</span></span><br><span class="line">        <span class="keyword">if</span> (status) &#123;</span><br><span class="line">            System.out.println(<span class="string">"booking flight succeeded!"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"booking flight failed!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们看到，在订机票的同时，还要处理查看耗时和记录日志，关注的事情太多了，头大啊。而且项目大了之后，出了订机票之外，很多业务功能都要写类似的代码。让AOP来拯救~</p>
+<h2 id="使用AOP的场景"><a href="#使用AOP的场景" class="headerlink" title="使用AOP的场景"></a>使用AOP的场景</h2>
       
     </div>
     
@@ -530,8 +545,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,6 +654,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP是什么？"><span class="nav-number">1.</span> <span class="nav-text">AOP是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个场景"><span class="nav-number">2.</span> <span class="nav-text">一个场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用AOP的场景"><span class="nav-number">3.</span> <span class="nav-text">使用AOP的场景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
